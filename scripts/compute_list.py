@@ -97,7 +97,7 @@ class Names:
                     if len(ensembl_genes) > 1:
                         print(f"The columns of {source_name}#{row} match multiple EnsemblGenes:")
                         for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():
-                            print(f"  {ensembl_gene_name} via: {ensembl_gene_name}")
+                            print(f"  {ensembl_gene_name} via: {ensembl_source_name}")
                     for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():
                         if ensembl_gene_name not in self.ensembl_genes:
                             self.ensembl_genes[ensembl_gene_name] = ensembl_source_name

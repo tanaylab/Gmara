@@ -1,7 +1,7 @@
 SPECIES = human mouse
 
 human_LISTS = transcription_factor
-mouse_LISTS =
+mouse_LISTS = transcription_factor
 
 .PHONY: all
 .PHONY: namespaces

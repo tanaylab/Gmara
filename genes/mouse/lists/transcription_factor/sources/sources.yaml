@@ -1,0 +1,6 @@
+# SCENIC https://scenic.aertslab.org/
+# Downloaded URL: https://resources.aertslab.org/cistarget/tf_lists/allTFs_mm.txt
+- data_file: SCENIC.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol

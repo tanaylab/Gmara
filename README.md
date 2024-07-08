@@ -64,7 +64,15 @@ Namespaces:
 
 Lists:
 
-* WIP
+* Transcription factors:
+
+  [EnsemblGene](genes/mouse/lists/transcription_factor/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/mouse/lists/transcription_factor/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/mouse/lists/transcription_factor/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/mouse/lists/transcription_factor/names/GeneSymbol.tsv),
+  [HGNC](genes/mouse/lists/transcription_factor/names/HGNC.tsv),
+  [RefSeq](genes/mouse/lists/transcription_factor/names/RefSeq.tsv),
+  [UCSC](genes/mouse/lists/transcription_factor/names/UCSC.tsv).
 
 ## Details
 
