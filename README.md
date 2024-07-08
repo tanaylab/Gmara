@@ -12,16 +12,16 @@ Specifically, the files called `genes/`_species_`/lists/`_list_`/names/`_namespa
 contains a list of symbols of human transcription factor genes. You can just access these files directly from github
 (using explicit commit tags if you want reproducible results).
 
-The files also contain a second column called `provenance` which can help in tracking _why_ the gene name is included in
-the list, by referring to source files of the list and/or the gene namespaces. These files are described below, but
-you do not have to deal with this to just use the list.
+The files also contain a additional columns which can help in tracking _why_ the gene name is included in the list, by
+referring to source files of the list and/or the gene namespaces. These columns and files are described below, but you
+do not have to deal with this to just use the list.
 
 In general, this repository is meant to be used as a convenient *initial starting point* for analysis, rather than serve
 as a "source of truth". It is designed to make it easy to apply lists to to arbitrary data sets regardless of the
-version of the genes names was used, so the lists include retired/deprecated/aliased/renamed genes. That is, we
-construct the lists such that if a name does *not* appear in a list, you can be fairly certain that what you are
-looking up *doesn't* belong in it. If the name *does* appear in the list, then *probably* what you are looking up
-belongs in it, but there's no guarantee.
+version of the genes names was used, so the lists include retired/deprecated/aliased/renamed genes. We try to construct
+the lists such that if a name does *not* appear in a list, you can be fairly certain that what you are looking up
+*doesn't* belong in it (according to any of our sources). If the name *does* appear in the list, then *probably* what
+you are looking up belongs in it, but there's no guarantee.
 
 **The analyst is responsible for exercising judgment and common sense when using these lists.**
 
