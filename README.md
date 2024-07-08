@@ -25,6 +25,47 @@ you are looking up belongs in it, but there's no guarantee.
 
 **The analyst is responsible for exercising judgment and common sense when using these lists.**
 
+## Quick access
+
+The repository currently holds the following:
+
+**Human gene lists:**
+
+Namespaces:
+  [EnsemblGene](genes/human/namespaces/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/human/namespaces/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/human/namespaces/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/human/namespaces/names/GeneSymbol.tsv),
+  [HGNC](genes/human/namespaces/names/HGNC.tsv),
+  [RefSeq](genes/human/namespaces/names/RefSeq.tsv),
+  [UCSC](genes/human/namespaces/names/UCSC.tsv).
+
+Lists:
+
+* Transcription factors:
+  [EnsemblGene](genes/human/lists/transcription_factor/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/human/lists/transcription_factor/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/human/lists/transcription_factor/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/human/lists/transcription_factor/names/GeneSymbol.tsv),
+  [HGNC](genes/human/lists/transcription_factor/names/HGNC.tsv),
+  [RefSeq](genes/human/lists/transcription_factor/names/RefSeq.tsv),
+  [UCSC](genes/human/lists/transcription_factor/names/UCSC.tsv).
+
+**Mouse gene lists:**
+
+Namespaces:
+[EnsemblGene](genes/mouse/namespaces/names/EnsemblGene.tsv),
+[EnsemblProtein](genes/mouse/namespaces/names/EnsemblProtein.tsv),
+[EnsemblTranscript](genes/mouse/namespaces/names/EnsemblTranscript.tsv),
+[GeneSymbol](genes/mouse/namespaces/names/GeneSymbol.tsv),
+[MGI](genes/mouse/namespaces/names/MGI.tsv),
+[RefSeq](genes/mouse/namespaces/names/RefSeq.tsv),
+[UCSC](genes/mouse/namespaces/names/UCSC.tsv).
+
+Lists:
+
+* WIP
+
 ## Details
 
 The lists here track only "known" genes and explicitly ignore clones and fragments (e.g. "AC005041.3"). That is, we
