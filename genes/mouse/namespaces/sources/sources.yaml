@@ -1,3 +1,114 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e34471bf46e197f3e7b919e1efcc85fba93a215ba0e8068da7d1fcb08d69545d
-size 3131
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39)
+# Each column is a selected attribute.
+- data_file: Ensembl.tsv
+  links:
+  - from:
+      column: Transcript stable ID
+      namespace: EnsemblTranscript
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+  - from:
+      column: Protein stable ID
+      namespace: EnsemblProtein
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# MGI (Mouse Genome Informatics): https://www.informatics.jax.org/
+# Via: https://www.informatics.jax.org/downloads/reports/index.html#marker
+# Downloaded URL: https://www.informatics.jax.org/downloads/reports/MRK_List1.rpt
+- data_file: MGI.tsv
+  links:
+  - from:
+      column: MGI Accession ID
+      namespace: MGI
+    to:
+      column: Current Marker Symbol (if withdrawn)
+      namespace: MGI
+  - from:
+      column: Marker Synonyms (pipe-separated)
+      namespace: GeneSymbol
+      separator: '|'
+    to:
+      column: Current Marker Symbol (if withdrawn)
+      namespace: GeneSymbol
+  - from:
+      column: [ Current Marker Symbol (if withdrawn), Marker Symbol ]
+      namespace: GeneSymbol
+    to:
+      column: [ Current MGI Accession ID (if withdrawn), MGI Accession ID ]
+      namespace: MGI
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.MGI.tsv
+  links:
+  - from:
+      column: MGI ID
+      namespace: MGI
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.UCSC.tsv
+  links:
+  - from:
+      column: UCSC Stable ID
+      namespace: UCSC
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_mRNA.tsv
+  links:
+  - from:
+      column: RefSeq mRNA ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_ncRNA.tsv
+  links:
+  - from:
+      column: RefSeq ncRNA ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCm39.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_peptide.tsv
+  links:
+  - from:
+      column: RefSeq peptide ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene

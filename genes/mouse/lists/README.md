@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bb42a5fec6729db114f9b1fd286b04aa1b59409dd5e0a808d32adb8bf5633976
-size 163
+This directory holds:
+
+* `log.txt` - The log from the last time we computed the lists from their `sources`.
+* `list_name`... - A directory for each list of genes.

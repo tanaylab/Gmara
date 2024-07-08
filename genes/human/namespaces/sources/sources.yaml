@@ -1,3 +1,136 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4546a2c17e49d23758f6158f6715b4eeb74bcea3d4e7af39f868c51e29b6d7e2
-size 3606
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.tsv
+  links:
+  - from:
+      column: Transcript stable ID
+      namespace: EnsemblTranscript
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+  - from:
+      column: Protein stable ID
+      namespace: EnsemblProtein
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# HGNC (Hugo Gene Nomenclature Committee) https://www.genenames.org
+# Via: https://www.genenames.org/download/archive/
+# Downloaded URL: https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/tsv/hgnc_complete_set.txt
+# At date: 2024-07-06
+- data_file: HGNC.Current.tsv
+  links:
+  - from:
+      column: symbol
+      namespace: GeneSymbol
+    to:
+      column: hgnc_id
+      namespace: HGNC
+  - from:
+      column: prev_symbol
+      namespace: GeneSymbol
+      separator: '|'
+    to:
+      column: symbol
+      namespace: GeneSymbol
+  - from:
+      column: alias_symbol
+      namespace: GeneSymbol
+      separator: '|'
+    to:
+      column: symbol
+      namespace: GeneSymbol
+
+# Downloaded URL: https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/tsv/withdrawn.txt
+# At date: 2024-07-06
+# And then subject to: `sed 's/@//g;s/Entry Withdrawn/Withdrawn/g;s/|[^ ,]*//g'`
+- data_file: HGNC.Withdrawn.tsv
+  links:
+  - from:
+      column: HGNC_ID
+      namespace: HGNC
+    to:
+      column: MERGED_INTO_REPORT(S) (i.e HGNC_ID
+      namespace: HGNC
+      separator: ','
+  - from:
+      column: WITHDRAWN_SYMBOL
+      namespace: GeneSymbol
+    to:
+      column: MERGED_INTO_REPORT(S) (i.e HGNC_ID
+      namespace: HGNC
+      separator: ','
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.HGNC.tsv
+  links:
+  - from:
+      column: HGNC ID
+      namespace: HGNC
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.UCSC.tsv
+  links:
+  - from:
+      column: UCSC Stable ID
+      namespace: UCSC
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_mRNA.tsv
+  links:
+  - from:
+      column: RefSeq mRNA ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_ncRNA.tsv
+  links:
+  - from:
+      column: RefSeq ncRNA ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+
+# Ensembl https://www.ensembl.org/index.html
+# Download via: https://www.ensembl.org/biomart/martview
+#   Ensembl Genes 112
+#   Human genes (GRCh38.p14)
+# Each column is a selected attribute.
+- data_file: Ensembl.RefSeq_peptide.tsv
+  links:
+  - from:
+      column: RefSeq peptide ID
+      namespace: RefSeq
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene

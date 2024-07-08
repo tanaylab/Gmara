@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:27fb4e71a4d08ca8425d10f8d0c999b8dbef67f530d98d8a043c13a15f6bcc67
-size 417
+# University of Toronto paper by Samuel Lambert et al.
+# Via: https://humantfs.ccbr.utoronto.ca/
+# Downloaded URL: https://humantfs.ccbr.utoronto.ca/download/v_1.01/DatabaseExtract_v_1.01.csv
+# Post-processing:
+# - Manually filtered by `Is TF?` == `Yes`
+# - Changed DUX1_HUMAN and DUX3_HUMAN to empty string (no Ensembl ID).
+- data_file: Toronto.csv
+  columns:
+    Ensembl ID: EnsemblGene
+    HGNC symbol: GeneSymbol

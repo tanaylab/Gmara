@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1773dc72463b773a6419b2e1dc0fb76a26caf03ed74076747be0f7b587667bef
-size 363
+A list of [transcription factor genes](https://en.wikipedia.org/wiki/Transcription_factor).
+
+This directory holds:
+
+* `sources` - The sources of the information we have on this list of genes.
+* `names` - The computed names of the genes in the list in the different name spaces.
+* `log.txt` - The log from the last time we computed the `names` from the `sources`.

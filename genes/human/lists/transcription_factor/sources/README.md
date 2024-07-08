@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:02d160a31eefc378ef0a5bc3a2076160a3cf587b9036f5ad8bf14f5d87fbc85e
-size 307
+This directory holds the sources of the list of genes:
+
+* `sources.yaml` lists the source files and how to process them.
+* `<name>.csv` and/or `<name>.tsv` are comma-seperated or tab-seperated data source files. The `<name>` typically
+  based on the name(s) of the relevant namespaces it contains data for.
