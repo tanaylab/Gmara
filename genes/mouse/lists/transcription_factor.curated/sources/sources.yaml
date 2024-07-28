@@ -1,0 +1,5 @@
+# Manually curated list.
+- data_file: CURATED.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol

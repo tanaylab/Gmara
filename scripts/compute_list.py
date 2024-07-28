@@ -95,7 +95,7 @@ class Names:
                         print(f"- {column_name} ({namespace_name}): {split_names(namespace_name, gene_names[row])}")
                 else:
                     if len(ensembl_genes) > 1:
-                        print(f"The columns of {source_name}#{row} match multiple EnsemblGenes:")
+                        print(f"The columns of {source_name}#{row + 1} match multiple EnsemblGenes:")
                         for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():
                             print(f"  {ensembl_gene_name} via: {ensembl_source_name}")
                     for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():

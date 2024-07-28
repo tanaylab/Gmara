@@ -1,7 +1,7 @@
 SPECIES = human mouse
 
 human_LISTS = transcription_factor
-mouse_LISTS = transcription_factor
+mouse_LISTS = transcription_factor transcription_factor.curated
 
 .PHONY: all
 .PHONY: complete
