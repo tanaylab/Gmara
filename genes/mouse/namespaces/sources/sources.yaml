@@ -18,6 +18,34 @@
       column: Gene stable ID
       namespace: EnsemblGene
 
+# Ensembl https://www.ensembl.org/index.html
+# Downloaded URL: https://ftp.ensembl.org/pub/release-112/mysql/mus_musculus_core_112_39/stable_id_event.txt.gz
+# Filtered for ENSMUSG, ENSMUST and ENSMUSP data.
+- data_file: Ensembl.Genes.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblGene
+    to:
+      column: 2
+      namespace: EnsemblGene
+- data_file: Ensembl.Transcripts.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblTranscript
+    to:
+      column: 2
+      namespace: EnsemblTranscript
+- data_file: Ensembl.Proteins.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblProtein
+    to:
+      column: 2
+      namespace: EnsemblProtein
+
 # MGI (Mouse Genome Informatics): https://www.informatics.jax.org/
 # Via: https://www.informatics.jax.org/downloads/reports/index.html#marker
 # Downloaded URL: https://www.informatics.jax.org/downloads/reports/MRK_List1.rpt

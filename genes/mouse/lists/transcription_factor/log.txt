@@ -9,9 +9,15 @@ Load SCENIC.tsv ...
 The columns of SCENIC#482 match multiple EnsemblGenes:
   ENSMUSG00000025408 via: SCENIC#482[0] : Ddit3 => MGI#84982[Current Marker Symbol (if withdrawn);Marker Symbol] : Ddit3 => MGI#84982[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109247 => Ensembl.MGI#13077[MGI ID -> Gene stable ID] : ENSMUSG00000025408
   ENSMUSG00000116429 via: SCENIC#482[0] : Ddit3 => MGI#84982[Current Marker Symbol (if withdrawn);Marker Symbol] : Ddit3 => MGI#84982[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109247 => Ensembl.MGI#13080[MGI ID -> Gene stable ID] : ENSMUSG00000116429
+The columns of SCENIC#867 match multiple EnsemblGenes:
+  ENSMUSG00000051469 via: SCENIC#867[0] : Zfp24 => MGI#11084[Current Marker Symbol (if withdrawn)] : Zfp24 => MGI#11084[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:1929704 => Ensembl.MGI#2487[MGI ID -> Gene stable ID] : ENSMUSG00000051469
+  ENS!000752857 via: SCENIC#867[0] : Zfp24 => MGI#11084[Current Marker Symbol (if withdrawn)] : Zfp24 => MGI#165615[Marker Synonyms (pipe-separated) -> Current Marker Symbol (if withdrawn)] : Krox19 => MGI#165614[Current Marker Symbol (if withdrawn)] : Krox19 => MGI#165614[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:99172 => Unrecognized
+The columns of SCENIC#982 match multiple EnsemblGenes:
+  ENS!000753386 via: SCENIC#982[0] : Zfp65 => MGI#752693[Current Marker Symbol (if withdrawn)] : Zfp65 => MGI#752693[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:107447 => Unrecognized
+  ENSMUSG00000071281 via: SCENIC#982[0] : Zfp65 => MGI#752693[Current Marker Symbol (if withdrawn)] : Zfp65 => MGI#752694[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:107769 => Ensembl.MGI#31094[MGI ID -> Gene stable ID] : ENSMUSG00000071281
 The columns of SCENIC#1643 match multiple EnsemblGenes:
-  ENSMUSG00000025453 via: SCENIC#1643[0] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn)] : Nnt => MGI#175059[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109279 => Ensembl.MGI#36853[MGI ID -> Gene stable ID] : ENSMUSG00000025453
-  ENSMUSG00000116207 via: SCENIC#1643[0] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn)] : Nnt => MGI#175059[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109279 => Ensembl.MGI#36899[MGI ID -> Gene stable ID] : ENSMUSG00000116207
+  ENSMUSG00000025453 via: SCENIC#1643[0] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn)] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109279 => Ensembl.MGI#36853[MGI ID -> Gene stable ID] : ENSMUSG00000025453
+  ENSMUSG00000116207 via: SCENIC#1643[0] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn)] : Nnt => MGI#12356[Current Marker Symbol (if withdrawn);Marker Symbol -> Current MGI Accession ID (if withdrawn);MGI Accession ID] : MGI:109279 => Ensembl.MGI#36899[MGI ID -> Gene stable ID] : ENSMUSG00000116207
 Write names/EnsemblTranscript.tsv ...
 Write names/UCSC.tsv ...
 Write names/EnsemblGene.tsv ...

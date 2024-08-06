@@ -112,7 +112,7 @@ class Namespaces:
         for from_gene_name in from_gene_names:
             if from_gene_name != "":
                 for to_gene_name in to_gene_names:
-                    if to_gene_name != "":
+                    if to_gene_name != "" and to_gene_name != from_gene_name:
                         if to_namespace_name not in from_namespace.genes[from_gene_name].links:
                             from_namespace.genes[from_gene_name].links[to_namespace_name] = {}
                         if to_gene_name not in from_namespace.genes[from_gene_name].links[to_namespace_name]:
@@ -236,7 +236,7 @@ def split_names(namespace_name, separator, names):
 
 def normalize_name(namespace_name, name):
     name = name.strip()
-    if name.upper() == "NULL":
+    if name.upper() in ("NULL", "\\N"):
         return ""
     if namespace_name == "UCSC":
         return name
@@ -252,16 +252,21 @@ def get_link_column(frame, link):
 
     if isinstance(column, str):
         data = frame.loc[:, column].values
+    elif isinstance(column, int):
+        data = frame.iloc[:, column].values
     else:
         data = None
         columns = column
         for column in columns:
-            data = frame.loc[:, column].values
+            if isinstance(column, str):
+                column_data = frame.loc[:, column].values
+            elif isinstance(column, int):
+                column_data = frame.iloc[:, column].values
             if data is None:
-                data = data
+                data = column_data
             else:
                 mask = data == ""
-                data[mask] = data[mask]
+                data[mask] = column_data[mask]
         column = ";".join(columns)
 
     return namespace_name, column, separator, data

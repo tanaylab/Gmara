@@ -18,6 +18,34 @@
       column: Gene stable ID
       namespace: EnsemblGene
 
+# Ensembl https://www.ensembl.org/index.html
+# Downloaded URL: https://ftp.ensembl.org/pub/release-112/mysql/homo_sapiens_core_112_38/stable_id_event.txt.gz
+# Filtered for ENSG, ENST and ENSP data.
+- data_file: Ensembl.Genes.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblGene
+    to:
+      column: 2
+      namespace: EnsemblGene
+- data_file: Ensembl.Transcripts.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblTranscript
+    to:
+      column: 2
+      namespace: EnsemblTranscript
+- data_file: Ensembl.Proteins.tsv
+  links:
+  - from:
+      column: 0
+      namespace: EnsemblProtein
+    to:
+      column: 2
+      namespace: EnsemblProtein
+
 # HGNC (Hugo Gene Nomenclature Committee) https://www.genenames.org
 # Via: https://www.genenames.org/download/archive/
 # Downloaded URL: https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/tsv/hgnc_complete_set.txt
