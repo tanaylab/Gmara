@@ -44,19 +44,22 @@ The columns of CURATED#119 match multiple EnsemblGenes:
 The columns of CURATED#128 match multiple EnsemblGenes:
   ENSG00000274577 via: CURATED#128[0] : LHX1 => HGNC.Current#14926[symbol] : LHX1 => HGNC.Current#14926[symbol -> hgnc_id] : HGNC:6593 => Ensembl.HGNC#60516[HGNC ID -> Gene stable ID] : ENSG00000274577
   ENSG00000273706 via: CURATED#128[0] : LHX1 => HGNC.Current#14926[symbol] : LHX1 => HGNC.Current#14926[symbol -> hgnc_id] : HGNC:6593 => Ensembl.HGNC#140197[HGNC ID -> Gene stable ID] : ENSG00000273706
-The columns of CURATED#174 match multiple EnsemblGenes:
-  ENSG00000145287 via: CURATED#174[0] : PLAC8 => HGNC.Current#25931[symbol] : PLAC8 => HGNC.Current#25931[symbol -> hgnc_id] : HGNC:19254 => Ensembl.HGNC#117991[HGNC ID -> Gene stable ID] : ENSG00000145287
-  ENSG00000105198 via: CURATED#174[0] : PLAC8 => HGNC.Current#25931[symbol] : PLAC8 => HGNC.Current#14897[alias_symbol -> symbol] : LGALS13 => HGNC.Current#14897[symbol] : LGALS13 => HGNC.Current#14897[symbol -> hgnc_id] : HGNC:15449 => Ensembl.HGNC#243609[HGNC ID -> Gene stable ID] : ENSG00000105198
-The columns of CURATED#194 match multiple EnsemblGenes:
-  ENSG00000285438 via: CURATED#194[0] : SOX7 => HGNC.Current#37141[symbol] : SOX7 => HGNC.Current#37141[symbol -> hgnc_id] : HGNC:18196 => Ensembl.HGNC#32344[HGNC ID -> Gene stable ID] : ENSG00000285438
-  ENSG00000171056 via: CURATED#194[0] : SOX7 => HGNC.Current#37141[symbol] : SOX7 => HGNC.Current#37141[symbol -> hgnc_id] : HGNC:18196 => Ensembl.HGNC#195500[HGNC ID -> Gene stable ID] : ENSG00000171056
-The columns of CURATED#214 match multiple EnsemblGenes:
-  ENSG00000071564 via: CURATED#214[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38508[symbol -> hgnc_id] : HGNC:11633 => Ensembl.HGNC#224257[HGNC ID -> Gene stable ID] : ENSG00000071564
-  ENSG00000152284 via: CURATED#214[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38514[prev_symbol -> symbol] : TCF7L1 => HGNC.Current#38514[symbol] : TCF7L1 => HGNC.Current#38514[symbol -> hgnc_id] : HGNC:11640 => Ensembl.HGNC#54909[HGNC ID -> Gene stable ID] : ENSG00000152284
-  ENSG00000292149 via: CURATED#214[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38514[prev_symbol -> symbol] : TCF7L1 => HGNC.Current#38514[symbol] : TCF7L1 => HGNC.Current#38514[symbol -> hgnc_id] : HGNC:11640 => Ensembl.HGNC#85177[HGNC ID -> Gene stable ID] : ENSG00000292149
-The columns of CURATED#225 match multiple EnsemblGenes:
-  ENSG00000100219 via: CURATED#225[0] : XBP1 => HGNC.Current#42573[symbol] : XBP1 => HGNC.Current#42573[symbol -> hgnc_id] : HGNC:12801 => Ensembl.HGNC#102325[HGNC ID -> Gene stable ID] : ENSG00000100219
-  ENSG00000249947 via: CURATED#225[0] : XBP1 => HGNC.Current#42573[symbol] : XBP1 => HGNC.Current#42574[prev_symbol -> symbol] : XBP1P1 => HGNC.Current#42574[symbol] : XBP1P1 => HGNC.Current#42574[symbol -> hgnc_id] : HGNC:12802 => Ensembl.HGNC#203557[HGNC ID -> Gene stable ID] : ENSG00000249947
+The columns of CURATED#175 match multiple EnsemblGenes:
+  ENSG00000145287 via: CURATED#175[0] : PLAC8 => HGNC.Current#25931[symbol] : PLAC8 => HGNC.Current#25931[symbol -> hgnc_id] : HGNC:19254 => Ensembl.HGNC#117991[HGNC ID -> Gene stable ID] : ENSG00000145287
+  ENSG00000105198 via: CURATED#175[0] : PLAC8 => HGNC.Current#25931[symbol] : PLAC8 => HGNC.Current#14897[alias_symbol -> symbol] : LGALS13 => HGNC.Current#14897[symbol] : LGALS13 => HGNC.Current#14897[symbol -> hgnc_id] : HGNC:15449 => Ensembl.HGNC#243609[HGNC ID -> Gene stable ID] : ENSG00000105198
+The columns of CURATED#195 match multiple EnsemblGenes:
+  ENSG00000285438 via: CURATED#195[0] : SOX7 => HGNC.Current#37141[symbol] : SOX7 => HGNC.Current#37141[symbol -> hgnc_id] : HGNC:18196 => Ensembl.HGNC#32344[HGNC ID -> Gene stable ID] : ENSG00000285438
+  ENSG00000171056 via: CURATED#195[0] : SOX7 => HGNC.Current#37141[symbol] : SOX7 => HGNC.Current#37141[symbol -> hgnc_id] : HGNC:18196 => Ensembl.HGNC#195500[HGNC ID -> Gene stable ID] : ENSG00000171056
+The columns of CURATED#215 match multiple EnsemblGenes:
+  ENSG00000071564 via: CURATED#215[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38508[symbol -> hgnc_id] : HGNC:11633 => Ensembl.HGNC#224257[HGNC ID -> Gene stable ID] : ENSG00000071564
+  ENSG00000152284 via: CURATED#215[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38514[prev_symbol -> symbol] : TCF7L1 => HGNC.Current#38514[symbol] : TCF7L1 => HGNC.Current#38514[symbol -> hgnc_id] : HGNC:11640 => Ensembl.HGNC#54909[HGNC ID -> Gene stable ID] : ENSG00000152284
+  ENSG00000292149 via: CURATED#215[0] : TCF3 => HGNC.Current#38508[symbol] : TCF3 => HGNC.Current#38514[prev_symbol -> symbol] : TCF7L1 => HGNC.Current#38514[symbol] : TCF7L1 => HGNC.Current#38514[symbol -> hgnc_id] : HGNC:11640 => Ensembl.HGNC#85177[HGNC ID -> Gene stable ID] : ENSG00000292149
+The columns of CURATED#216 match multiple EnsemblGenes:
+  ENSG00000196628 via: CURATED#216[0] : TCF4 => HGNC.Current#38510[symbol] : TCF4 => HGNC.Current#38510[symbol -> hgnc_id] : HGNC:11634 => Ensembl.HGNC#12536[HGNC ID -> Gene stable ID] : ENSG00000196628
+  ENSG00000148737 via: CURATED#216[0] : TCF4 => HGNC.Current#38510[symbol] : TCF4 => HGNC.Current#38516[prev_symbol -> symbol] : TCF7L2 => HGNC.Current#38516[symbol] : TCF7L2 => HGNC.Current#38516[symbol -> hgnc_id] : HGNC:11641 => Ensembl.HGNC#152776[HGNC ID -> Gene stable ID] : ENSG00000148737
+The columns of CURATED#227 match multiple EnsemblGenes:
+  ENSG00000100219 via: CURATED#227[0] : XBP1 => HGNC.Current#42573[symbol] : XBP1 => HGNC.Current#42573[symbol -> hgnc_id] : HGNC:12801 => Ensembl.HGNC#102325[HGNC ID -> Gene stable ID] : ENSG00000100219
+  ENSG00000249947 via: CURATED#227[0] : XBP1 => HGNC.Current#42573[symbol] : XBP1 => HGNC.Current#42574[prev_symbol -> symbol] : XBP1P1 => HGNC.Current#42574[symbol] : XBP1P1 => HGNC.Current#42574[symbol -> hgnc_id] : HGNC:12802 => Ensembl.HGNC#203557[HGNC ID -> Gene stable ID] : ENSG00000249947
 Write names/EnsemblTranscript.tsv ...
 Write names/UCSC.tsv ...
 Write names/EnsemblGene.tsv ...
