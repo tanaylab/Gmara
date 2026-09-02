@@ -36,7 +36,7 @@ def complete_namespace(namespace_name, sources_dir):
     else:
         ignored_names = set()
 
-    for gene_name, source_name in sorted(missing_genes.items(), key = lambda k: str.casefold(str(k))):
+    for gene_name, source_name in sorted(missing_genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
         gene_name = normalize_name(namespace_name, gene_name)
         if gene_name not in ignored_names \
                 and (complete_function is None or not complete_function(sources_dir, gene_name, source_name)):
@@ -67,7 +67,7 @@ def complete_EnsemblGene(sources_dir, ensembl_id, source_name):
     if len(active_ids) == 0:
         return False
 
-    for active_id in active_ids:
+    for active_id in sorted(active_ids):
         active_namespace = ensembl_namespace_of(active_id)
         store_extra(sources_dir, "EnsemblGene.Extra.tsv", ensembl_id, active_namespace, active_id, source_name, url)
     print(f"Found {len(active_ids)} mappings for the missing Ensembl {ensembl_id}")

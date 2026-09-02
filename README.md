@@ -118,6 +118,112 @@ possible EnsemblGenes for these names. If the result is empty, then something is
 one possible EnsemblGene, it is noteworthy, but possible; we include in the list all the EnsemblGenes that map to all the
 identifiers given for the list entry.
 
+## Provenance
+
+Every names file has a `source` and an `ensembl_source` column recording *why* the name is there and *why* it maps to
+its EnsemblGene. This is meant for debugging; you do not need it to just use the lists.
+
+A provenance is a sequence of steps separated by `;`. Each step is written _source_`:`_line_`[`_csv_columns_`]`,
+naming the 1-based _line_ of the _source_ data file (under one of the `sources` sub-directories), and the 0-based
+indices of the CSV columns of that line the data was taken from:
+
+* A single index, e.g. `HGNC.Current:37136[1]` - line `37136` of `HGNC.Current.tsv` holds the value `SOX4` in its CSV
+  column `1` (`symbol`), which is why this GeneSymbol exists.
+
+* Two indices around `>`, e.g. `Ensembl.HGNC:20684[3>0]` - line `20684` of `Ensembl.HGNC.tsv` maps the value of its
+  CSV column `3` (`HGNC ID`) to the value of its CSV column `0` (`Gene stable ID`).
+
+* Indices separated by `|` are alternative CSV columns, tried in order until one of them is not empty, e.g.
+  `MGI:4[13|6]`.
+
+A name which does not map to any EnsemblGene has the `ensembl_source` `Unrecognized`.
+
+The _namespace_`.Missing.tsv`, _namespace_`.Extra.tsv` and _namespace_`.Ignored.tsv` files record only the source and
+the CSV columns, without a line, e.g. `regulator/CURATED[0]`. Their entries outlive the line they were seen in - the
+list sources are hand-edited, so by the time anyone reads the entry the line holds some other gene - and some of them
+name a data set which is not in this repository at all, and so has no line to point at.
+
+The CSV columns are identified by index rather than by name to keep the data files small; their names are in the
+header line of the source data file itself. To see a provenance spelled out, pipe the names file lines through
+`scripts/expand_provenance.py`, which looks up every step and reports it in YAML:
+
+```
+$ grep -P '^SOX4\t' genes/human/lists/transcription_factor/names/GeneSymbol.tsv | scripts/expand_provenance.py human
+- name: SOX4
+  ensembl_gene: ENSG00000124766
+  source:
+  - step: HGNC.Current:37136[1]
+    file: genes/human/namespaces/sources/HGNC.Current.tsv
+    line: 37136
+    csv_column: symbol
+    value: SOX4
+  - step: HGNC.Current:37136[1>0]
+    file: genes/human/namespaces/sources/HGNC.Current.tsv
+    line: 37136
+    from_csv_column: symbol
+    to_csv_column: hgnc_id
+    value: HGNC:11200
+  - step: Ensembl.HGNC:20684[3>0]
+    file: genes/human/namespaces/sources/Ensembl.HGNC.tsv
+    line: 20684
+    from_csv_column: HGNC ID
+    to_csv_column: Gene stable ID
+    value: ENSG00000124766
+  ensembl_source:
+  - step: Toronto:1146[1]
+    file: genes/human/lists/transcription_factor/sources/Toronto.csv
+    line: 1146
+    csv_column: Ensembl ID
+    value: ENSG00000124766
+  - step: Ensembl:20660[0]
+    file: genes/human/namespaces/sources/Ensembl.tsv
+    line: 20660
+    csv_column: Gene stable ID
+    value: ENSG00000124766
+```
+
+When a step names alternative CSV columns, the report lists all of them, and the `value` is the first one which was
+not empty:
+
+```
+$ grep -P '^03\.MMHAP34FRA\.seq\t' genes/mouse/namespaces/names/GeneSymbol.tsv | scripts/expand_provenance.py mouse
+- name: 03.MMHAP34FRA.seq
+  ensembl_gene: ENS!000148760
+  source:
+  - step: MGI:4[13|6]
+    file: genes/mouse/namespaces/sources/MGI.tsv
+    line: 4
+    csv_column:
+    - Current Marker Symbol (if withdrawn)
+    - Marker Symbol
+    value: 03.MMHAP34FRA.seq
+  ensembl_source:
+  - step: MGI:4[13|6>12|0]
+    file: genes/mouse/namespaces/sources/MGI.tsv
+    line: 4
+    from_csv_column:
+    - Current Marker Symbol (if withdrawn)
+    - Marker Symbol
+    to_csv_column:
+    - Current MGI Accession ID (if withdrawn)
+    - MGI Accession ID
+    value: MGI:1337005
+  - step: Unrecognized
+```
+
+The reported `value` is the whole cell, so for a CSV column holding several names (e.g. `Marker Synonyms
+(pipe-separated)`) it shows all of them rather than the single one the step matched; that one is the `name` of the
+row.
+
+The separators were also chosen so that a step is a jump target in an editor. In vim, given
+
+```
+:set path+=genes/human/namespaces/sources
+:set suffixesadd=.tsv
+```
+
+pressing `gF` on a step opens the source data file at the line.
+
 ## Status
 
 This repository is still in its "alpha" phase - *anything* may change without notice. This will be updated to "beta"
@@ -167,24 +273,18 @@ Each list is a sub-directory under the `lists` sub-directory, holding the follow
   * `name` contains the identifier of the gene in the namespace, in alphabetical order. For example, `SOX4` is listed in the
     human transcription factors list in the GeneSymbol namespace.
 
-  * `source` contains the source of the mapping from the `name` to the EnsemblGene namespace. This is useful for
-    debugging. For example `HGNC.Current#37136[symbol] : SOX4 => HGNC.Current#37136[symbol -> hgnc_id] : HGNC:11200 =>
-    Ensembl.HGNC#20684[HGNC ID -> Gene stable ID] : ENSG00000124766` indicates that the `HGNC.Current` source file, in
-    line `37136`, contains a column `symbol` with a value `SOX4` (which is why this GeneSymbol exists). This was mapped
-    to `HGNC:11200` by the association between the `hgnc_id` and the `symbol` columns of the same line. Finally, the
-    HGNC identifier was mapped to `ENSG00000124766` by association between the `HGNC ID` and `Gene stable ID` columns in
-    line `20684` of the source file `Ensembl.HGNC`.
+  * `source` contains the [provenance](#provenance) of the mapping from the `name` to the EnsemblGene namespace. For
+    example, `HGNC.Current:37136[1];HGNC.Current:37136[1>0];Ensembl.HGNC:20684[3>0]` for `SOX4`.
 
   * `ensembl_gene` contains the identifier of the gene in the EnsemblGene namespace, which was included in the list. For
     example, `ENSG00000124766` for `SOX4`. If several such identifiers are possible, the file will contain multiple
     lines.
 
-  * `ensembl_source` contains the source of the inclusion of the EnsemblGene in the list. This is useful for debugging.
-    For example, `Toronto#1146[Ensembl ID] : ENSG00000124766 => Ensembl#20660[Gene stable ID] : ENSG00000124766`
-    indicates the `Toronto` source file for the list, in line `1146`, in the `Ensembl ID` column, contained
-    `ENSG00000124766`. This was verified to be an active identifier in the `Ensembl` source file line `20660` in the
-    `Gene stable ID` column. If the identifier was retired, this will contain a mapping from the retired identifier to
-    the active one.
+  * `ensembl_source` contains the [provenance](#provenance) of the inclusion of the EnsemblGene in the list. For
+    example, `Toronto:1146[1];Ensembl:20660[0]` indicates the `Toronto` source file for the list, in line `1146`, in
+    its column `1` (`Ensembl ID`), contained `ENSG00000124766`. This was verified to be an active identifier in line
+    `20660` of the `Ensembl` source file, in its column `0` (`Gene stable ID`). If the identifier was retired, this
+    will contain a mapping from the retired identifier to the active one.
 
 * To compute the above, we begin with a set of manually curated "source of truth" files. These are TSV or CSV files
   under the `sources` sub-directory which have at least one column containing names (of some namespace). In addition we
@@ -280,17 +380,17 @@ To represent the result, in the `names` sub-directory we keep the following file
 
   * `name` contains the name of the gene in the namespace, in alphabetical order. For example, `SOX4`.
 
-  * `source` contains the source of the name. For example `HGNC.Current#37136[symbol] : SOX4` indicates that `SOX4` was
-    the value of the `symbol` column of the `HGNC.Current` source file in line `37136`.
+  * `source` contains the [provenance](#provenance) of the name. For example `HGNC.Current:37136[1]` indicates that
+    `SOX4` was the value of column `1` (`symbol`) of the `HGNC.Current` source file in line `37136`.
 
   * `ensembl_gene` contains the name of the EnsemblGene the gene maps to. For example, `ENSG00000124766` for `SOX4`.
 
-  * `ensembl_source` contains the source of the mapping of the gene to the EnsemblGene. For example,
-    `HGNC.Current#37136[symbol -> hgnc_id] : HGNC:11200 => Ensembl.HGNC#20684[HGNC ID -> Gene stable ID] :
-    ENSG00000124766` indicates that `SOX` was mapped to the HGNC id `HGNC:11200` by the association between columns
-    `hgnc_id` and `symbol` in line `37136` of the `HGNC.Current` source file. This was in turn mapped to the EnsemblGene
-    identifier `ENSG00000124766` by the association between the `HGNC ID` and `Gene stable ID` columns in line `20684`
-    of the source file `Ensembl.HGNC`.
+  * `ensembl_source` contains the [provenance](#provenance) of the mapping of the gene to the EnsemblGene. For
+    example, `HGNC.Current:37136[1>0];Ensembl.HGNC:20684[3>0]` indicates that `SOX4` was mapped to the HGNC id
+    `HGNC:11200` by the association between columns `1` (`symbol`) and `0` (`hgnc_id`) in line `37136` of the
+    `HGNC.Current` source file. This was in turn mapped to the EnsemblGene identifier `ENSG00000124766` by the
+    association between columns `3` (`HGNC ID`) and `0` (`Gene stable ID`) in line `20684` of the source file
+    `Ensembl.HGNC`.
 
 We follow all the links, including the extra data, and compute for every identifier, in every namespace, the possible
 EnsemblGenes it may map to. This computation is done by ``scripts/compute_namespaces.py``.

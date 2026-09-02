@@ -20,8 +20,21 @@
 
 # Ensembl https://www.ensembl.org/index.html
 # Downloaded URL: https://ftp.ensembl.org/pub/release-112/mysql/homo_sapiens_core_112_38/stable_id_event.txt.gz
-# Filtered for ENSG, ENST and ENSP data.
+# This is a dump of the `stable_id_event` table. It has no header line, and its columns are `old_stable_id`,
+# `old_version`, `new_stable_id`, `new_version`, `mapping_session_id`, `type` and `score`; we only use the two
+# stable identifier columns.
+# The download itself is not kept here (it is 126MB). It was split by identifier prefix into the three files
+# below, which is an exact partition of its 2636483 lines:
+#     grep ENSG stable_id_event.txt > Ensembl.Genes.tsv        #  607024 lines
+#     grep ENST stable_id_event.txt > Ensembl.Transcripts.tsv  # 1436219 lines
+#     grep ENSP stable_id_event.txt > Ensembl.Proteins.tsv     #  593240 lines
+# We then removed three lines from Ensembl.Transcripts.tsv. They carry transcript identifiers but are typed
+# `translation`, which is an error in the Ensembl data (the mouse dump has no such lines):
+#     \N               \N  ENST00000515292  1  417  translation  0
+#     ENST00000515292  1   ENST00000516410  1  418  translation  0.99
+#     \N               \N  ENST00000516411  1  418  translation  0
 - data_file: Ensembl.Genes.tsv
+  has_header: false
   links:
   - from:
       column: 0
@@ -30,6 +43,7 @@
       column: 2
       namespace: EnsemblGene
 - data_file: Ensembl.Transcripts.tsv
+  has_header: false
   links:
   - from:
       column: 0
@@ -38,6 +52,7 @@
       column: 2
       namespace: EnsemblTranscript
 - data_file: Ensembl.Proteins.tsv
+  has_header: false
   links:
   - from:
       column: 0

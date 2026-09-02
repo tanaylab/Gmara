@@ -2,6 +2,7 @@
 
 import os.path
 import pandas as pd
+import provenance
 import re
 import shutil
 import sys
@@ -80,18 +81,19 @@ class Names:
             else:
                 gene_names = frame.loc[:, column_name].values
             n_rows = len(gene_names)
-            columns.append((column_name, namespace_name, gene_names))
+            columns.append((column_name, provenance.columns_of(frame, column_name), namespace_name, gene_names))
 
         for row in range(n_rows):
             ensembl_genes = None
-            for (column_name, namespace_name, gene_names) in columns:
+            for (column_name, column_columns, namespace_name, gene_names) in columns:
                 ensembl_genes = self.compute_column_ensembl_genes(
-                    list_name, source_name, row + row_offset, column_name, namespace_name, gene_names[row], ensembl_genes
+                    list_name, source_name, row + row_offset, column_name, column_columns,
+                    namespace_name, gene_names[row], ensembl_genes
                 )
             if ensembl_genes is not None:
                 if len(ensembl_genes) == 0:
                     print(f"No EnsemblGene matches all of the columns of {source_name}#{row}:")
-                    for (column_name, namespace_name, gene_names) in columns:
+                    for (column_name, column_columns, namespace_name, gene_names) in columns:
                         print(f"- {column_name} ({namespace_name}): {split_names(namespace_name, gene_names[row])}")
                 else:
                     if len(ensembl_genes) > 1:
@@ -102,7 +104,8 @@ class Names:
                         if ensembl_gene_name not in self.ensembl_genes:
                             self.ensembl_genes[ensembl_gene_name] = ensembl_source_name
 
-    def compute_column_ensembl_genes(self, list_name, source_name, row, column_name, namespace_name, gene_names, ensembl_genes):
+    def compute_column_ensembl_genes(self, list_name, source_name, row, column_name, column_columns,
+                                     namespace_name, gene_names, ensembl_genes):
         namespace = self.namespaces[namespace_name]
 
         all_gene_names = split_names(namespace_name, gene_names)
@@ -114,7 +117,7 @@ class Names:
                 namespace.ignored_genes.add(gene_name)
                 with open(f"{self.namespaces_dir}/sources/{namespace_name}.Missing.tsv", "a") as file:
                     print(f"Missing: {source_name}#{row}[{column_name}] gene: {gene_name} from namespace: {namespace_name}", flush = True)
-                    print(f"{gene_name}\t{list_name}/{source_name}#{row}[{column_name}] : {gene_name}", file = file)
+                    print(f"{gene_name}\t{provenance.origin(f'{list_name}/{source_name}', column_columns)}", file = file)
 
         if len(gene_names) == 0:
             return ensembl_genes
@@ -126,8 +129,9 @@ class Names:
                 if gene.source_name == ensembl_source_name:
                     gene_source_name = ensembl_source_name
                 else:
-                    gene_source_name = f"{gene.source_name} => {ensembl_source_name}"
-                ensembl_gene_source_name = f"{source_name}#{row}[{column_name}] : {gene_name} => {gene_source_name}"
+                    gene_source_name = f"{gene.source_name}{provenance.JOIN}{ensembl_source_name}"
+                ensembl_gene_source_name = \
+                    f"{provenance.step(source_name, row, column_columns)}{provenance.JOIN}{gene_source_name}"
                 if ensembl_gene_name not in column_ensembl_genes or len(ensembl_gene_source_name) < len(column_ensembl_genes[ensembl_gene_name]):
                     column_ensembl_genes[ensembl_gene_name] = ensembl_gene_source_name
                     if gene_name in TRACK_GENES:
@@ -153,10 +157,11 @@ class Names:
             with open(f"{names_dir}/{namespace_name}.tsv", "w") as file:
                 print("name\tsource\tensembl_gene\tensembl_source", file = file)
                 namespace = self.namespaces[namespace_name]
-                for gene_name, gene in sorted(namespace.genes.items(), key = lambda k: str.casefold(str(k))):
-                    for ensembl_gene_name, ensembl_source_name in sorted(gene.ensembl_genes.items(), key = lambda k: str.casefold(str(k))):
+                for gene_name, gene in sorted(namespace.genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
+                    for ensembl_gene_name, ensembl_source_name \
+                    in sorted(gene.ensembl_genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
                         if ensembl_source_name != gene.source_name:
-                            ensembl_source_name = f"{gene.source_name} => {ensembl_source_name}"
+                            ensembl_source_name = f"{gene.source_name}{provenance.JOIN}{ensembl_source_name}"
                         if ensembl_gene_name in self.ensembl_genes:
                             print(f"{gene_name}\t{ensembl_source_name}\t{ensembl_gene_name}\t{self.ensembl_genes[ensembl_gene_name]}", file = file)
 

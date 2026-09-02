@@ -1,3 +1,5 @@
 junk*
 .*.sw*
 .DS_Store
+__pycache__
+log.complete.txt

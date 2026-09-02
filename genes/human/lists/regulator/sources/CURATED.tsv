@@ -1,3 +1,277 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:31a9828d01c50044d7ace93ac194fce800713410c4b6049829015b15e4e0c142
-size 5597
+AHR	Mast
+AKNA	Basophils
+ALX1	Gastrulation
+ANKRD1	Gastrulation
+ARG1	Gastrulation
+ARID3A	Basophils
+ARID3B	Basophils
+ARID5B	Mast
+ASCL2	Bone marrow
+BACH1	Basophils,Monocyte
+BATF	Mast
+BCL11A	Bone marrow
+BCL11B	Bone marrow
+CAMTA1	Basophils,Eosinophil,Ery,Mast,Mk
+CDX1	Gastrulation
+CDX2	Gastrulation
+CDX4	Gastrulation
+CEBPA	Basophils,Eosinophil,Monocyte,Neutrophils
+CEBPB	Basophils,Monocyte
+CEBPD	Eosinophil,Neutrophils
+CEBPE	Eosinophil,Monocyte,Neutrophils
+CEBPZ	Stress,Bone marrow
+CKLF	Hematopoeisis
+CREB1	Bone Marrow
+CREM	Bone Marrow
+CTNNB1	Bone marrow
+DACH1	Eosinophil,Neutrophils
+DLX3	Gastrulation
+DLX5	Gastrulation
+DLX6	Gastrulation
+DPPA2	Gastrulation
+DPPA3	Gastrulation
+DPPA4	Gastrulation
+E2F3	Eosinophil,Ery
+E2F4	Mk,Monocyte
+EBF1	Bone marrow
+EBF2	Gastrulation
+EBF3	Gastrulation
+EBF4	Bone marrow
+EGR1	Bone marrow
+EGR2	Bone marrow
+ELF1	Basophils,Ery,Mk
+ELF2	Ery
+ELK3	Bone marrow
+ELK4	Basophils,Eosinophil
+EN1	Bone marrow
+EOMES	Gastrulation
+EPAS1	Basophils
+ERG	Gastrulation
+ETS1	Basophils,Gastrulation,Neutrophils
+ETS2	Eosinophil,Ery,Mast
+ETV2	Gastrulation
+ETV5	Gastrulation
+ETV6	Eosinophil,Mk,Neutrophils
+EVX1	Gastrulation
+FLI1	Basophils,Mk
+FOS	Eosinophil
+FOSB	Hematopoeisis
+FOSL2	Stress,Bone marrow
+FOXA1	Gastrulation
+FOXA2	Gastrulation
+FOXC1	Gastrulation
+FOXC2	Gastrulation
+FOXD1	Gastrulation
+FOXD3	Gastrulation
+FOXF1	Gastrulation
+FOXF2	Gastrulation
+FOXJ1	Gastrulation
+FOXN2	Basophils
+FOXO1	Gastrulation
+FOXO3	Basophils,Ery,Gastrulation
+FOXO4	Gastrulation
+FOXP1	Stress,Bone marrow
+FOXP3	Bone marrow
+FOXQ1	Gastrulation
+GATA1	Eosinophil,Ery,Gastrulation,Mk
+GATA2	Basophils,Eosinophil,Ery,Gastrulation,Mast
+GATA3	Gastrulation
+GATA4	Gastrulation
+GATA5	Gastrulation
+GATA6	Gastrulation
+GBX2	Gastrulation
+GFI1	Eosinophil,Neutrophils
+GFI1B	Mk
+GLIS1	Gastrulation
+GSC	Gastrulation
+GTF3A	Basophils,Eosinophil,Ery
+HAND1	Gastrulation
+HAND2	Gastrulation
+HES1	Gastrulation
+HES3	Gastrulation
+HES5	Gastrulation
+HES6	Mk
+HES7	Gastrulation
+HESX1	Gastrulation
+HHEX	Eosinophil,Ery
+HLF	Hematopoeisis
+HLX	Hematopoeisis
+HMGA1	Basophils,Mast,Mk
+HNF4A	Gastrulation
+HOPX	Hematopoeisis
+HOXA1	Gastrulation
+HOXA10	Gastrulation
+HOXA11	Gastrulation
+HOXA3	Gastrulation
+HOXA4	Gastrulation
+HOXA5	Gastrulation
+HOXA7	Gastrulation
+HOXA9	Gastrulation
+HOXB1	Gastrulation
+HOXB4	Gastrulation
+HOXB5	Hematopoeisis
+HOXB6	Gastrulation
+HOXB9	Gastrulation
+HOXC5	Gastrulation
+HOXC8	Gastrulation
+HOXC9	Gastrulation
+HOXD3	Gastrulation
+HOXD4	Gastrulation
+HOXD9	Gastrulation
+ID1	Hematopoeisis
+ID2	Basophils
+ID3	Hematopoeisis
+IFI16	Basophils,Mk,Neutrophils
+IKZF1	Basophils,Mast
+IKZF2	Basophils,Eosinophil
+ILF2	Mast
+IRF1	Bone marrow
+IRF4	Eosinophil
+IRF7	Hematopoeisis
+IRF8	Monocyte
+IRX2	Gastrulation
+IRX3	Gastrulation
+IRX5	Gastrulation
+ISL1	Gastrulation
+JUN	Monocyte,Neutrophils
+JUNB	Mast,Monocyte,Neutrophils
+JUND	Basophils,Eosinophil,Ery,Mk,Monocyte
+KLF1	Basophils,Eosinophil,Ery,Gastrulation,Mast,Mk
+KLF10	Bone marrow
+KLF13	Basophils,Ery,Gastrulation,Mast,Monocyte
+KLF2	Basophils,Gastrulation
+KLF3	Ery
+KLF4	Gastrulation,Monocyte
+KLF5	Gastrulation
+KLF6	Basophils,Gastrulation,Mast,Monocyte,Neutrophils
+KLF7	Gastrulation
+KLF8	Gastrulation
+KLF9	Gastrulation
+LEF1	Bone marrow
+LHX1	Gastrulation
+LHX2	Gastrulation
+LMO2	Ery
+LMO4	Mk
+LMX1A	Gastrulation
+LMX1B	Gastrulation
+LYL1	Eosinophil,Ery,Gastrulation,Mast,Monocyte,Neutrophils
+MAF	Basophils,Mast
+MAFB	Monocyte,Neutrophils
+MAFG	Mk
+MEF2A	Monocyte
+MEF2C	hematopoeisis
+MEF2D	Bone marrow
+MEIS1	Gastrulation
+MEIS2	Gastrulation
+MEOX1	Gastrulation
+MEOX2	Gastrulation
+MESP1	Gastrulation
+MITF	Mast
+MIXL1	Gastrulation
+MSX1	Gastrulation
+MSX2	Gastrulation
+MXD1	Eosinophil,Monocyte,Neutrophils
+MXI1	Ery
+MYB	Basophils,Ery,Mk,Monocyte,Neutrophils
+MYBL1	Bone marrow
+MYC	Basophils,Eosinophil,Ery,Mast,Mk,Monocyte,Neutrophils
+NANOG	Gastrulation
+NFAT5	Basophils
+NFATC3	Basophils,Mast
+NFE2	Ery,Mk
+NFE2L2	Ery
+NFIA	Mk
+NFKB1	Ery
+NFYB	Eosinophil,Ery,Mk
+NKX1-2	Gastrulation
+NKX2-5	Gastrulation
+NOTO	Gastrulation
+NR2F1	Gastrulation
+NR2F2	Gastrulation
+NUPR1	Monocyte
+OLIG1	Gastrulation
+OTX1	Gastrulation
+OTX2	Gastrulation
+PAX2	Gastrulation
+PAX3	Gastrulation
+PAX5	Gastrulation
+PAX6	Gastrulation
+PBX1	Mk
+PITX1	Gastrulation
+POU2F1	Hematopoeisis
+POU2F2	Bone marrow
+POU3F1	Gastrulation
+PRDM1	Gastrulation
+PRRX2	Gastrulation
+RARA	Bone Marrow
+RARB	Bone Marrow
+RARG	Bone Marrow
+RBMS1	Monocyte
+REST	Ery
+RORA	Bone Marrow
+RORB	Bone Marrow
+RORC	Bone Marrow
+RUNX1	Basophils,Ery,Mast,Mk
+RUNX2	Basophils,Eosinophil,Mast
+RUNX3	Hematopoeisis
+RXRA	Bone Marrow
+RXRB	Bone Marrow
+RXRG	Bone Marrow
+SATB1	Bone marrow
+SIX3	Gastrulation
+SNAI1	Gastrulation
+SNAI2	Gastrulation
+SOCS3	Hematopoeisis
+SOX1	Gastrulation
+SOX17	Gastrulation
+SOX18	Gastrulation
+SOX2	Gastrulation
+SOX3	Gastrulation
+SOX4	Eosinophil,Mk,Neutrophils
+SOX6	Ery
+SOX7	Gastrulation
+SOX9	Gastrulation
+SP3	Ery
+SP4	Hematopoeisis
+SP5	Gastrulation
+SP6	Gastrulation
+SP8	Gastrulation
+SPI1	Basophils,Eosinophil,Monocyte,Neutrophils
+SPIB	Hematopoeisis
+STAT1	Ery
+STAT3	Eosinophil,Ery,Mk,Neutrophils
+STAT4	Bone Marrow
+STAT5A	Ery
+T	Gastrulation
+TAL1	Ery,Gastrulation,Mk
+TBX21	Hematopoeisis
+TBX3	Gastrulation
+TBX4	Gastrulation
+TBX5	Gastrulation
+TBX6	Gastrulation
+TCF15	Gastrulation
+TCF3	Eosinophil,Ery,Mk
+TCF4	hematopoeisis
+TCF7	Hematopoeisis
+TFAP2A	Gastrulation
+TFAP2C	Gastrulation
+TFDP1	Basophils,Eosinophil,Ery,Mast,Mk,Monocyte,Neutrophils
+TFDP2	Eosinophil,Mk,Monocyte,Ery
+TFEC	Bone Marrow
+TLE3	Hematopoeisis
+TOX	Gastrulation
+TRERF1	Basophils,Eosinophil
+TWIST1	Gastrulation
+TWIST2	Gastrulation
+USF2	Basophils,Mast
+UTF1	Gastrulation
+XBP1	BEP,Eosinophil,Mk
+ZBTB16	Mk
+ZBTB20	Basophils,Eosinophil
+ZEB1	Hematopoeisis
+ZEB2	Hematopoeisis
+ZFHX3	Monocyte
+ZFP36L2	Ery
+ZFPM1	Gastrulation
+ZNF593	Monocyte
+ZNF706	Ery

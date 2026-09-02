@@ -1,3 +1,277 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:980e3cce22893c66aafccd6ed3bb5d9ca53ab3a7cf10bee8a3bbb52f44038044
-size 5600
+Akna	basophils
+Alx1	gastrulation
+Ankrd1	gastrulation
+Arg1	gastrulation
+Arid3a	basophils
+Arid3b	basophils
+Arid5b	mast
+Ascl2	Bone marrow
+Bach1	basophils,monocyte
+Batf	mast
+Bcl11a	Bone marrow
+Bcl11b	Bone marrow
+Camta1	basophils,eosinophil,ery,mast,mk
+Cdx1	gastrulation
+Cdx2	gastrulation
+Cdx4	gastrulation
+Cebpa	basophils,eosinophil,monocyte,neutrophils
+Cebpb	basophils,monocyte
+Cebpd	eosinophil,neutrophils
+Cebpe	eosinophil,monocyte,neutrophils
+Cebpz	Stress,Bone marrow
+Cklf	hematopoeisis
+Creb1	Bone Marrow
+Crem	Bone Marrow
+Ctnnb1	Bone marrow
+Dach1	eosinophil,neutrophils
+Dlx3	gastrulation
+Dlx5	gastrulation
+Dlx6	gastrulation
+Dppa2	gastrulation
+Dppa3	gastrulation
+Dppa4	gastrulation
+E2f3	eosinophil,ery
+E2f4	mk,monocyte
+Ebf1	Bone marrow
+Ebf2	gastrulation
+Ebf3	gastrulation
+Ebf4	Bone marrow
+Egr1	Bone marrow
+Egr2	Bone marrow
+Elf1	basophils,ery,mk
+Elf2	ery
+Elk3	Bone marrow
+Elk4	basophils,eosinophil
+En1	Bone marrow
+Eomes	gastrulation
+Epas1	basophils
+Erg	gastrulation
+Ets1	basophils,gastrulation,neutrophils
+Ets2	eosinophil,ery,mast
+Etv2	gastrulation
+Etv5	Gastrulation
+Etv6	eosinophil,mk,neutrophils
+Evx1	gastrulation
+Fli1	basophils,mk
+Fos	eosinophil
+Fosb	hematopoeisis
+Fosl2	Stress,Bone marrow
+Foxa1	gastrulation
+Foxa2	gastrulation
+Foxc1	gastrulation
+Foxc2	Gastrulation
+Foxd1	gastrulation
+Foxd3	gastrulation
+Foxf1	gastrulation
+Foxf2	gastrulation
+Foxj1	gastrulation
+Foxn2	basophils
+Foxo1	Gastrulation
+Foxo3	basophils,ery,gastrulation
+Foxo4	gastrulation
+Foxp1	Stress,Bone marrow
+Foxp3	Bone marrow
+Foxq1	gastrulation
+Gata1	eosinophil,ery,gastrulation,mk
+Gata2	basophils,eosinophil,ery,gastrulation,mast
+Gata3	gastrulation
+Gata4	gastrulation
+Gata5	gastrulation
+Gata6	gastrulation
+Gbx2	gastrulation
+Gfi1	eosinophil,neutrophils
+Gfi1b	mk
+Glis1	Gastrulation
+Gsc	gastrulation
+Gtf3a	basophils,eosinophil,ery
+Hand1	gastrulation
+Hand2	gastrulation
+Hes1	Gastrulation
+Hes3	gastrulation
+Hes5	gastrulation
+Hes6	mk
+Hes7	gastrulation
+Hesx1	gastrulation
+Hhex	eosinophil,ery
+Hlf	hematopoeisis
+Hlx	Hematopoeisis
+Hmga1	basophils,mast,mk
+Hnf4a	gastrulation
+Hopx	hematopoeisis
+Hoxa1	gastrulation
+Hoxa10	gastrulation
+Hoxa11	gastrulation
+Hoxa3	gastrulation
+Hoxa4	gastrulation
+Hoxa5	gastrulation
+Hoxa7	gastrulation
+Hoxa9	gastrulation
+Hoxb1	gastrulation
+Hoxb4	gastrulation
+Hoxb5	hematopoeisis
+Hoxb6	gastrulation
+Hoxb9	gastrulation
+Hoxc5	gastrulation
+Hoxc8	gastrulation
+Hoxc9	gastrulation
+Hoxd3	gastrulation
+Hoxd4	gastrulation
+Hoxd9	Gastrulation
+Id1	hematopoeisis
+Id2	basophils
+Id3	hematopoeisis
+Ifi16	basophils,mk,neutrophils
+Ikzf1	basophils,mast
+Ikzf2	basophils,eosinophil
+Ilf2	mast
+Irf1	Bone marrow
+Irf4	eosinophil
+Irf7	hematopoeisis
+Irf8	monocyte
+Irx2	gastrulation
+Irx3	gastrulation
+Irx5	gastrulation
+Isl1	Gastrulation
+Jun	monocyte,neutrophils
+Junb	mast,monocyte,neutrophils
+Jund	basophils,eosinophil,ery,mk,monocyte
+Klf1	basophils,eosinophil,ery,gastrulation,mast,mk
+Klf10	Bone marrow
+Klf13	basophils,ery,gastrulation,mast,monocyte
+Klf2	basophils,gastrulation
+Klf3	ery
+Klf4	gastrulation
+Klf5	gastrulation
+Klf6	basophils,gastrulation,mast,monocyte,neutrophils
+Klf7	gastrulation
+Klf8	gastrulation
+Klf9	gastrulation
+Lef1	Bone marrow
+Lhx1	gastrulation
+Lhx2	gastrulation
+Lmo2	ery
+Lmo4	mk
+Lmx1a	gastrulation
+Lmx1b	gastrulation
+Lyl1	eosinophil,ery,gastrulation,mast,monocyte,neutrophils
+Maf	basophils,mast
+Mafb	monocyte,neutrophils
+Mafg	mk
+Mef2a	monocyte
+Mef2cv	 hematopoeisis
+Mef2d	Bone marrow
+Meis1	gastrulation
+Meis2	gastrulation
+Meox1	gastrulation
+Meox2	gastrulation
+Mesp1	gastrulation
+Mitf	mast
+Mixl1	gastrulation
+Msx1	gastrulation
+Msx2	Gastrulation
+Mxd1	eosinophil,monocyte,neutrophils
+Mxi1	ery
+Myb	basophils,ery,mk,monocyte,neutrophils
+Mybl1	Bone marrow
+Myc	basophils,eosinophil,ery,mast,mk,monocyte,neutrophils
+Nanog	gastrulation
+Nfat5	basophils
+Nfatc3	basophils,mast
+Nfe2	ery,mk
+Nfe2l2	ery
+Nfia	mk
+Nfkb1	ery
+Nfyb	eosinophil,ery,mk
+Nkx1-2	gastrulation
+Nkx2-5	gastrulation
+Noto	gastrulation
+Nr2f1	gastrulation
+Nr2f2	gastrulation
+Nupr1	monocyte
+Olig1	gastrulation
+Otx1	gastrulation
+Otx2	gastrulation
+Pax2	gastrulation
+Pax3	gastrulation
+Pax5	gastrulation
+Pax6	gastrulation
+Pbx1	mk
+Pitx1	gastrulation
+Pou2f1	Hematopoeisis
+Pou2f2	Bone marrow
+Pou3f1	gastrulation
+Prdm1	Gastrulation
+Prrx2	gastrulation
+Rara	Bone Marrow
+Rarb	Bone Marrow
+Rarg	Bone Marrow
+Rbms1	monocyte
+Rest	ery
+Rora	Bone Marrow
+Rorb	Bone Marrow
+Rorc	Bone Marrow
+Runx1	basophils,ery,mast,mk
+Runx2	basophils,eosinophil,mast
+Runx3	hematopoeisis
+Rxra	Bone Marrow
+Rxrb	Bone Marrow
+Rxrg	Bone Marrow
+Satb1	Bone marrow
+Six3	gastrulation
+Snai1	gastrulation
+Snai2	gastrulation
+Socs3	hematopoeisis
+Sox1	gastrulation
+Sox17	gastrulation
+Sox18	gastrulation
+Sox2	gastrulation
+Sox3	gastrulation
+Sox4	eosinophil,mk,neutrophils
+Sox6	ery
+Sox7	gastrulation
+Sox9	gastrulation
+Sp3	ery
+Sp4	Hematopoeisis
+Sp5	gastrulation
+Sp6	gastrulation
+Sp8	gastrulation
+Spi1	basophils,eosinophil,monocyte,neutrophils
+Spib	hematopoeisis
+Stat1	ery
+Stat3	eosinophil,ery,mk,neutrophils
+Stat4	Bone Marrow
+Stat5a	ery
+T	gastrulation
+Tal1	ery,gastrulation,mk
+Tal1	gastrulation
+Tbx21	hematopoeisis
+Tbx3	gastrulation
+Tbx4	gastrulation
+Tbx5	gastrulation
+Tbx6	gastrulation
+Tcf15	gastrulation
+Tcf3	eosinophil,ery,mk
+Tcf4v	hematopoeisis
+Tcf7	hematopoeisis
+Tfap2a	gastrulation
+Tfap2c	gastrulation
+Tfdp1	basophils,eosinophil,ery,mast,mk,monocyte,neutrophils
+Tfdp2	eosinophil,mk,monocyte,ery
+Tfec	Bone Marrow
+Tle3	hematopoeisis
+Tox	Gastrulation
+Trerf1	basophils,eosinophil
+Twist1	gastrulation
+Twist2	Gastrulation
+Usf2	basophils,mast
+Utf1	gastrulation
+Xbp1	bep,eosinophil,mk
+Zbtb16	mk
+Zbtb20	basophils,eosinophil
+Zeb1	Hematopoeisis
+Zeb2	Hematopoeisis
+Zfhx3	monocyte
+Zfp36l2	ery
+Zfpm1	gastrulation
+Znf593	monocyte
+Znf706	ery

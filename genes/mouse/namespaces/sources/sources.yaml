@@ -20,8 +20,16 @@
 
 # Ensembl https://www.ensembl.org/index.html
 # Downloaded URL: https://ftp.ensembl.org/pub/release-112/mysql/mus_musculus_core_112_39/stable_id_event.txt.gz
-# Filtered for ENSMUSG, ENSMUST and ENSMUSP data.
+# This is a dump of the `stable_id_event` table. It has no header line, and its columns are `old_stable_id`,
+# `old_version`, `new_stable_id`, `new_version`, `mapping_session_id`, `type` and `score`; we only use the two
+# stable identifier columns.
+# The download itself is not kept here. It was split by identifier prefix into the three files below, which is an
+# exact partition of its 2987266 lines:
+#     grep ENSMUSG stable_id_event.txt > Ensembl.Genes.tsv        #  761325 lines
+#     grep ENSMUST stable_id_event.txt > Ensembl.Transcripts.tsv  # 1464042 lines
+#     grep ENSMUSP stable_id_event.txt > Ensembl.Proteins.tsv     #  761899 lines
 - data_file: Ensembl.Genes.tsv
+  has_header: false
   links:
   - from:
       column: 0
@@ -30,6 +38,7 @@
       column: 2
       namespace: EnsemblGene
 - data_file: Ensembl.Transcripts.tsv
+  has_header: false
   links:
   - from:
       column: 0
@@ -38,6 +47,7 @@
       column: 2
       namespace: EnsemblTranscript
 - data_file: Ensembl.Proteins.tsv
+  has_header: false
   links:
   - from:
       column: 0

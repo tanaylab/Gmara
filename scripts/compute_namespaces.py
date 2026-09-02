@@ -2,6 +2,7 @@
 
 import os.path
 import pandas as pd
+import provenance
 import re
 import shutil
 import sys
@@ -48,18 +49,26 @@ class Namespaces:
             comment = "#",
         )
 
+        if has_header:
+            row_offset = 2
+        else:
+            row_offset = 1
+
         for link in source_spec["links"]:
             from_namespace_name, from_column, from_separator, from_data = get_link_column(frame, link["from"])
             to_namespace_name, to_column, to_separator, to_data = get_link_column(frame, link["to"])
+            from_columns = provenance.columns_of(frame, link["from"]["column"])
+            to_columns = provenance.columns_of(frame, link["to"]["column"])
+            link_columns = provenance.link(from_columns, to_columns)
 
             print(f"- Collect {source_name}[{from_column} -> {to_column}] ...", flush = True)
 
             for row in range(len(from_data)):
                 from_names = split_names(from_namespace_name, from_separator, from_data[row])
                 to_names = split_names(to_namespace_name, to_separator, to_data[row])
-                from_source_name = f"{source_name}#{row + 2}[{from_column}]"
-                to_source_name = f"{source_name}#{row + 2}[{to_column}]"
-                link_source_name = f"{source_name}#{row + 2}[{from_column} -> {to_column}]"
+                from_source_name = provenance.step(source_name, row + row_offset, from_columns)
+                to_source_name = provenance.step(source_name, row + row_offset, to_columns)
+                link_source_name = provenance.step(source_name, row + row_offset, link_columns)
                 self.add_names(from_source_name, from_namespace_name, from_names)
                 self.add_names(to_source_name, to_namespace_name, to_names)
                 self.link_names(link_source_name, from_namespace_name, from_names, to_namespace_name, to_names)
@@ -104,7 +113,7 @@ class Namespaces:
                 if gene_name not in namespace.genes:
                     if gene_name in TRACK_GENES:
                         print(f"TRACK: add_names source_name: {source_name} namespace_name: {namespace_name} gene_name: {gene_name}")
-                    namespace.genes[gene_name] = Gene(f"{source_name} : {gene_name}", gene_name)
+                    namespace.genes[gene_name] = Gene(source_name, gene_name)
 
     def link_names(self, link_source_name, from_namespace_name, from_gene_names, to_namespace_name, to_gene_names):
         from_namespace = self.namespaces[from_namespace_name]
@@ -116,7 +125,7 @@ class Namespaces:
                         if to_namespace_name not in from_namespace.genes[from_gene_name].links:
                             from_namespace.genes[from_gene_name].links[to_namespace_name] = {}
                         if to_gene_name not in from_namespace.genes[from_gene_name].links[to_namespace_name]:
-                            from_namespace.genes[from_gene_name].links[to_namespace_name][to_gene_name] = f"{link_source_name} : {to_gene_name}"
+                            from_namespace.genes[from_gene_name].links[to_namespace_name][to_gene_name] = link_source_name
                         from_namespace.links.add(to_namespace_name)
                         if from_gene_name in TRACK_GENES or to_gene_name in TRACK_GENES:
                             print(f"TRACK: link_names source_name: {link_source_name} from_namespace_name: {from_namespace_name} from_gene_name: {from_gene_name} to_namespace_name: {to_namespace_name} to_gene_name: {to_gene_name}")
@@ -138,7 +147,7 @@ class Namespaces:
         connected_namespaces_names = set(["EnsemblGene"])
 
         while len(unconnected_namespaces_names) > 0:
-            for from_namespace_name in unconnected_namespaces_names:
+            for from_namespace_name in sorted(unconnected_namespaces_names):
                 if self.connect_namespace_to_ensembl_genes(from_namespace_name, connected_namespaces_names):
                     unconnected_namespaces_names.remove(from_namespace_name)
                     connected_namespaces_names.add(from_namespace_name)
@@ -146,8 +155,8 @@ class Namespaces:
 
     def connect_namespace_to_ensembl_genes(self, from_namespace_name, connected_namespaces_names):
         from_namespace = self.namespaces[from_namespace_name]
-        for to_namespace_name in connected_namespaces_names:
-            if to_namespace_name in connected_namespaces_names and to_namespace_name in from_namespace.links:
+        for to_namespace_name in sorted(connected_namespaces_names):
+            if to_namespace_name in from_namespace.links:
                 self.connect_namespaces_to_ensembl_genes(from_namespace_name, to_namespace_name)
                 return True
 
@@ -174,7 +183,7 @@ class Namespaces:
                 if ensembl_source_name == to_gene.source_name:
                     source_name = link_source_name
                 else:
-                    source_name = f"{link_source_name} => {ensembl_source_name}"
+                    source_name = f"{link_source_name}{provenance.JOIN}{ensembl_source_name}"
                 if (ensembl_gene_name not in from_gene.ensembl_genes or len(source_name) < len(from_gene.ensembl_genes[ensembl_gene_name])):
                     from_gene.ensembl_genes[ensembl_gene_name] = source_name
 
@@ -191,13 +200,13 @@ class Namespaces:
                 if ensembl_source_name == from_gene.source_name:
                     source_name = from_gene.source_name
                 else:
-                    source_name = f"{from_gene.source_name} => {ensembl_source_name}"
+                    source_name = f"{from_gene.source_name}{provenance.JOIN}{ensembl_source_name}"
                 if link_source_name is not None:
-                    source_name = f"{link_source_name} => {source_name}"
+                    source_name = f"{link_source_name}{provenance.JOIN}{source_name}"
                 if ensembl_gene_name not in into_gene.ensembl_genes or len(source_name) < len(into_gene.ensembl_genes[ensembl_gene_name]):
                     into_gene.ensembl_genes[ensembl_gene_name] = source_name
                     if into_gene_name in TRACK_GENES or from_gene_name in TRACK_GENES or ensembl_gene_name in TRACK_GENES:
-                        print("TRACK {into_gene_name} => {ensembl_gene_name} via {from_gene_name} by: {source_name}")
+                        print(f"TRACK {into_gene_name} => {ensembl_gene_name} via {from_gene_name} by: {source_name}")
 
         if from_gene_name in path or namespace_name not in from_gene.links:
             return
@@ -222,7 +231,7 @@ class Namespaces:
         with open(f"{names_dir}/{namespace_name}.tsv", "w") as file:
             print("name\tsource\tensembl_gene\tensembl_source", file = file)
             genes = self.namespaces[namespace_name].genes
-            for gene_name, gene in sorted(genes.items(), key = lambda k: str.casefold(str(k))):
+            for gene_name, gene in sorted(genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
                 assert len(gene.ensembl_genes) > 0
                 for ensembl_gene, ensembl_source_name in gene.ensembl_genes.items():
                     print(f"{gene_name}\t{gene.source_name}\t{ensembl_gene}\t{ensembl_source_name}", file = file)

@@ -2,6 +2,7 @@
 
 import os.path
 import pandas as pd
+import provenance
 import re
 import shutil
 import sys
@@ -46,21 +47,21 @@ class Names:
         else:
             missing_names = set()
 
-        new_missing_names = {}
-        for gene_index, gene_name in enumerate(self.gene_names):
+        new_missing_names = set()
+        for gene_name in self.gene_names:
             if gene_name not in self.namespace.gene_names:
                 if gene_name in ignored_names:
                     print(f"The gene: '{gene_name}' is ignored from the namespace: {self.namespace.name}", flush = True)
                 elif gene_name in missing_names:
                     print(f"The gene: '{gene_name}' is already missing from the namespace: {self.namespace.name}", flush = True)
-                elif gene_name not in new_missing_names:
-                    new_missing_names[gene_name] = gene_index + 1
+                else:
+                    new_missing_names.add(gene_name)
 
         if len(new_missing_names) > 0:
             with open(missing_path, "a") as file:
-                for gene_name, gene_index in new_missing_names.items():
+                for gene_name in sorted(new_missing_names):
                     print(f"The gene: '{gene_name}' is added to missing from the namespace: {self.namespace.name}", flush = True)
-                    print(f"{gene_name}\t{self.source_name}#{gene_index} : {gene_name}", file = file)
+                    print(f"{gene_name}\t{provenance.origin(self.source_name, '0')}", file = file)
 
 def normalize_name(namespace_name, name):
     if namespace_name == "UCSC":
