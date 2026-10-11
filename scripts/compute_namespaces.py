@@ -101,7 +101,7 @@ class Namespaces:
                 from_names = split_names(from_namespace_name, None, from_gene_names[row])
                 to_names = split_names(to_namespace_names[row], None, to_gene_names[row])
                 self.add_names(from_source_names[row], from_namespace_name, from_names)
-                self.add_names(link_source_names[row], from_namespace_name, to_names)
+                self.add_names(link_source_names[row], to_namespace_names[row], to_names)
                 self.link_names(link_source_names[row], from_namespace_name, from_names, to_namespace_names[row], to_names)
 
     def add_names(self, source_name, namespace_name, gene_names):
@@ -129,8 +129,6 @@ class Namespaces:
                         from_namespace.links.add(to_namespace_name)
                         if from_gene_name in TRACK_GENES or to_gene_name in TRACK_GENES:
                             print(f"TRACK: link_names source_name: {link_source_name} from_namespace_name: {from_namespace_name} from_gene_name: {from_gene_name} to_namespace_name: {to_namespace_name} to_gene_name: {to_gene_name}")
-                            if to_namespace_name == from_namespace_name:
-                                print(f"TODOX: {from_namespace.genes[from_gene_name].links[to_namespace_name]}")
 
     def compute_different_ensembl_genes(self):
         print("Compute different EnsemblGene ...", flush = True)

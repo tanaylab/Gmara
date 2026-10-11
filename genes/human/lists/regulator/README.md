@@ -1,6 +1,8 @@
 A list of "regulator" genes, that is, transcription factors that presumably (directly or indirectly) regulate the
-expression of other genes. NOTE: This is a preliminary list containing only gastrulation genes.
+expression of other genes. NOTE: This is a preliminary list combining gastrulation and hematopoiesis genes.
 
-* `sources.yaml` lists the source files and how to process them.
-* `<name>.csv` and/or `<name>.tsv` are comma-seperated or tab-seperated data source files. The `<name>` typically
-  based on the name(s) of the relevant namespaces it contains data for.
+This directory holds:
+
+* `sources` - The sources of the information we have on this list of genes.
+* `names` - The computed names of the genes in the list in the different name spaces.
+* `log.txt` - The log from the last time we computed the `names` from the `sources`.

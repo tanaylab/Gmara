@@ -1,7 +1,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.tsv
   links:
@@ -84,7 +84,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39.p14)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.MGI.tsv
   links:
@@ -98,7 +98,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39.p14)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.UCSC.tsv
   links:
@@ -112,7 +112,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39.p14)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.RefSeq_mRNA.tsv
   links:
@@ -126,7 +126,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39.p14)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.RefSeq_ncRNA.tsv
   links:
@@ -140,7 +140,7 @@
 # Ensembl https://www.ensembl.org/index.html
 # Download via: https://www.ensembl.org/biomart/martview
 #   Ensembl Genes 112
-#   Human genes (GRCm39.p14)
+#   Mouse genes (GRCm39)
 # Each column is a selected attribute.
 - data_file: Ensembl.RefSeq_peptide.tsv
   links:

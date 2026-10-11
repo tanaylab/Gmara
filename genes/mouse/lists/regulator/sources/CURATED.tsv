@@ -19,7 +19,7 @@ Cebpb	basophils,monocyte
 Cebpd	eosinophil,neutrophils
 Cebpe	eosinophil,monocyte,neutrophils
 Cebpz	Stress,Bone marrow
-Cklf	hematopoeisis
+Cklf	hematopoiesis
 Creb1	Bone Marrow
 Crem	Bone Marrow
 Ctnnb1	Bone marrow
@@ -54,7 +54,7 @@ Etv6	eosinophil,mk,neutrophils
 Evx1	gastrulation
 Fli1	basophils,mk
 Fos	eosinophil
-Fosb	hematopoeisis
+Fosb	hematopoiesis
 Fosl2	Stress,Bone marrow
 Foxa1	gastrulation
 Foxa2	gastrulation
@@ -93,11 +93,11 @@ Hes6	mk
 Hes7	gastrulation
 Hesx1	gastrulation
 Hhex	eosinophil,ery
-Hlf	hematopoeisis
-Hlx	Hematopoeisis
+Hlf	hematopoiesis
+Hlx	Hematopoiesis
 Hmga1	basophils,mast,mk
 Hnf4a	gastrulation
-Hopx	hematopoeisis
+Hopx	hematopoiesis
 Hoxa1	gastrulation
 Hoxa10	gastrulation
 Hoxa11	gastrulation
@@ -108,7 +108,7 @@ Hoxa7	gastrulation
 Hoxa9	gastrulation
 Hoxb1	gastrulation
 Hoxb4	gastrulation
-Hoxb5	hematopoeisis
+Hoxb5	hematopoiesis
 Hoxb6	gastrulation
 Hoxb9	gastrulation
 Hoxc5	gastrulation
@@ -117,16 +117,16 @@ Hoxc9	gastrulation
 Hoxd3	gastrulation
 Hoxd4	gastrulation
 Hoxd9	Gastrulation
-Id1	hematopoeisis
+Id1	hematopoiesis
 Id2	basophils
-Id3	hematopoeisis
-Ifi16	basophils,mk,neutrophils
+Id3	hematopoiesis
+Ifi204	basophils,mk,neutrophils
 Ikzf1	basophils,mast
 Ikzf2	basophils,eosinophil
 Ilf2	mast
 Irf1	Bone marrow
 Irf4	eosinophil
-Irf7	hematopoeisis
+Irf7	hematopoiesis
 Irf8	monocyte
 Irx2	gastrulation
 Irx3	gastrulation
@@ -158,7 +158,7 @@ Maf	basophils,mast
 Mafb	monocyte,neutrophils
 Mafg	mk
 Mef2a	monocyte
-Mef2cv	 hematopoeisis
+Mef2c	hematopoiesis
 Mef2d	Bone marrow
 Meis1	gastrulation
 Meis2	gastrulation
@@ -197,7 +197,7 @@ Pax5	gastrulation
 Pax6	gastrulation
 Pbx1	mk
 Pitx1	gastrulation
-Pou2f1	Hematopoeisis
+Pou2f1	Hematopoiesis
 Pou2f2	Bone marrow
 Pou3f1	gastrulation
 Prdm1	Gastrulation
@@ -212,7 +212,7 @@ Rorb	Bone Marrow
 Rorc	Bone Marrow
 Runx1	basophils,ery,mast,mk
 Runx2	basophils,eosinophil,mast
-Runx3	hematopoeisis
+Runx3	hematopoiesis
 Rxra	Bone Marrow
 Rxrb	Bone Marrow
 Rxrg	Bone Marrow
@@ -220,7 +220,7 @@ Satb1	Bone marrow
 Six3	gastrulation
 Snai1	gastrulation
 Snai2	gastrulation
-Socs3	hematopoeisis
+Socs3	hematopoiesis
 Sox1	gastrulation
 Sox17	gastrulation
 Sox18	gastrulation
@@ -231,12 +231,12 @@ Sox6	ery
 Sox7	gastrulation
 Sox9	gastrulation
 Sp3	ery
-Sp4	Hematopoeisis
+Sp4	Hematopoiesis
 Sp5	gastrulation
 Sp6	gastrulation
 Sp8	gastrulation
 Spi1	basophils,eosinophil,monocyte,neutrophils
-Spib	hematopoeisis
+Spib	hematopoiesis
 Stat1	ery
 Stat3	eosinophil,ery,mk,neutrophils
 Stat4	Bone Marrow
@@ -244,21 +244,21 @@ Stat5a	ery
 T	gastrulation
 Tal1	ery,gastrulation,mk
 Tal1	gastrulation
-Tbx21	hematopoeisis
+Tbx21	hematopoiesis
 Tbx3	gastrulation
 Tbx4	gastrulation
 Tbx5	gastrulation
 Tbx6	gastrulation
 Tcf15	gastrulation
 Tcf3	eosinophil,ery,mk
-Tcf4v	hematopoeisis
-Tcf7	hematopoeisis
+Tcf4	hematopoiesis
+Tcf7	hematopoiesis
 Tfap2a	gastrulation
 Tfap2c	gastrulation
 Tfdp1	basophils,eosinophil,ery,mast,mk,monocyte,neutrophils
 Tfdp2	eosinophil,mk,monocyte,ery
 Tfec	Bone Marrow
-Tle3	hematopoeisis
+Tle3	hematopoiesis
 Tox	Gastrulation
 Trerf1	basophils,eosinophil
 Twist1	gastrulation
@@ -268,10 +268,10 @@ Utf1	gastrulation
 Xbp1	bep,eosinophil,mk
 Zbtb16	mk
 Zbtb20	basophils,eosinophil
-Zeb1	Hematopoeisis
-Zeb2	Hematopoeisis
+Zeb1	Hematopoiesis
+Zeb2	Hematopoiesis
 Zfhx3	monocyte
 Zfp36l2	ery
 Zfpm1	gastrulation
-Znf593	monocyte
-Znf706	ery
+Zfp593	monocyte
+Zfp706	ery

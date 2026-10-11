@@ -3,7 +3,7 @@ Genes Manifests Archive for RNA Analysis
 
 ## TL;DR
 
-This repository holds lists of genes for use in scRNA-seq analysis. They are stored in machine-readable CSV.TSV so they
+This repository holds lists of genes for use in scRNA-seq analysis. They are stored in machine-readable CSV/TSV so they
 can be used by software, directly from this repository, optionally with commit tags to ensure reproducibility.
 
 Specifically, the files called `genes/`_species_`/lists/`_list_`/names/`_namespace_`.tsv` contain, in the first column
@@ -12,13 +12,13 @@ Specifically, the files called `genes/`_species_`/lists/`_list_`/names/`_namespa
 contains a list of symbols of human transcription factor genes. You can just access these files directly from github
 (using explicit commit tags if you want reproducible results).
 
-The files also contain a additional columns which can help in tracking _why_ the gene name is included in the list, by
+The files also contain additional columns which can help in tracking _why_ the gene name is included in the list, by
 referring to source files of the list and/or the gene namespaces. These columns and files are described below, but you
 do not have to deal with this to just use the list.
 
 In general, this repository is meant to be used as a convenient *initial starting point* for analysis, rather than serve
-as a "source of truth". It is designed to make it easy to apply lists to to arbitrary data sets regardless of the
-version of the genes names was used, so the lists include retired/deprecated/aliased/renamed genes. We try to construct
+as a "source of truth". It is designed to make it easy to apply lists to arbitrary data sets regardless of the
+version of the gene names used, so the lists include retired/deprecated/aliased/renamed genes. We try to construct
 the lists such that if a name does *not* appear in a list, you can be fairly certain that what you are looking up
 *doesn't* belong in it (according to any of our sources). If the name *does* appear in the list, then *probably* what
 you are looking up belongs in it, but there's no guarantee.
@@ -51,33 +51,50 @@ Lists:
   [RefSeq](genes/human/lists/transcription_factor/names/RefSeq.tsv),
   [UCSC](genes/human/lists/transcription_factor/names/UCSC.tsv).
 
+* Regulators:
+  [EnsemblGene](genes/human/lists/regulator/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/human/lists/regulator/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/human/lists/regulator/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/human/lists/regulator/names/GeneSymbol.tsv),
+  [HGNC](genes/human/lists/regulator/names/HGNC.tsv),
+  [RefSeq](genes/human/lists/regulator/names/RefSeq.tsv),
+  [UCSC](genes/human/lists/regulator/names/UCSC.tsv).
+
 **Mouse gene lists:**
 
 Namespaces:
-[EnsemblGene](genes/mouse/namespaces/names/EnsemblGene.tsv),
-[EnsemblProtein](genes/mouse/namespaces/names/EnsemblProtein.tsv),
-[EnsemblTranscript](genes/mouse/namespaces/names/EnsemblTranscript.tsv),
-[GeneSymbol](genes/mouse/namespaces/names/GeneSymbol.tsv),
-[MGI](genes/mouse/namespaces/names/MGI.tsv),
-[RefSeq](genes/mouse/namespaces/names/RefSeq.tsv),
-[UCSC](genes/mouse/namespaces/names/UCSC.tsv).
+  [EnsemblGene](genes/mouse/namespaces/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/mouse/namespaces/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/mouse/namespaces/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/mouse/namespaces/names/GeneSymbol.tsv),
+  [MGI](genes/mouse/namespaces/names/MGI.tsv),
+  [RefSeq](genes/mouse/namespaces/names/RefSeq.tsv),
+  [UCSC](genes/mouse/namespaces/names/UCSC.tsv).
 
 Lists:
 
 * Transcription factors:
-
   [EnsemblGene](genes/mouse/lists/transcription_factor/names/EnsemblGene.tsv),
   [EnsemblProtein](genes/mouse/lists/transcription_factor/names/EnsemblProtein.tsv),
   [EnsemblTranscript](genes/mouse/lists/transcription_factor/names/EnsemblTranscript.tsv),
   [GeneSymbol](genes/mouse/lists/transcription_factor/names/GeneSymbol.tsv),
-  [HGNC](genes/mouse/lists/transcription_factor/names/HGNC.tsv),
+  [MGI](genes/mouse/lists/transcription_factor/names/MGI.tsv),
   [RefSeq](genes/mouse/lists/transcription_factor/names/RefSeq.tsv),
   [UCSC](genes/mouse/lists/transcription_factor/names/UCSC.tsv).
+
+* Regulators:
+  [EnsemblGene](genes/mouse/lists/regulator/names/EnsemblGene.tsv),
+  [EnsemblProtein](genes/mouse/lists/regulator/names/EnsemblProtein.tsv),
+  [EnsemblTranscript](genes/mouse/lists/regulator/names/EnsemblTranscript.tsv),
+  [GeneSymbol](genes/mouse/lists/regulator/names/GeneSymbol.tsv),
+  [MGI](genes/mouse/lists/regulator/names/MGI.tsv),
+  [RefSeq](genes/mouse/lists/regulator/names/RefSeq.tsv),
+  [UCSC](genes/mouse/lists/regulator/names/UCSC.tsv).
 
 ## Details
 
 The lists here track only "known" genes and explicitly ignore clones and fragments (e.g. "AC005041.3"). That is, we
-assume that to be note-worthy enough to be included in a list (e.g., transcription factors), the gene should be
+assume that to be noteworthy enough to be included in a list (e.g., transcription factors), the gene should be
 sufficiently known to be listed in the genes databases, as opposed to being a numbered fragment in some assembly. This
 assumption holds well for the well-studied genomes (e.g. `human` and `mouse`) we are focusing on. It will not hold for
 less-studied genomes.
@@ -136,7 +153,10 @@ indices of the CSV columns of that line the data was taken from:
 * Indices separated by `|` are alternative CSV columns, tried in order until one of them is not empty, e.g.
   `MGI:4[13|6]`.
 
-A name which does not map to any EnsemblGene has the `ensembl_source` `Unrecognized`.
+Some names do not map to any EnsemblGene. The `ensembl_source` of such a name ends with the step `Unrecognized`.
+
+Names fetched from web APIs have other kinds of steps. Their `source` names the source and CSV columns, without a
+line. Their `ensembl_source` contains the URL of the web API call.
 
 The _namespace_`.Missing.tsv`, _namespace_`.Extra.tsv` and _namespace_`.Ignored.tsv` files record only the source and
 the CSV columns, without a line, e.g. `regulator/CURATED[0]`. Their entries outlive the line they were seen in - the
@@ -245,7 +265,7 @@ The data is stored in the following tree:
         * A `namespaces` sub-directory contains a description of the gene namespaces used.
             * A `sources` sub-directory contains the source files we collected the gene namespaces from.
             * A `names` sub-directory contains the actual gene names.
-        * A `lists` sub-directory` contains the actual gene lists.
+        * A `lists` sub-directory contains the actual gene lists.
             * Each list is a sub-directory.
                 * A `sources` sub-directory contains the sources of the gene list.
                 * A `names` sub-directory contains the actual gene names.
@@ -291,16 +311,16 @@ Each list is a sub-directory under the `lists` sub-directory, holding the follow
   have a single `sources.yaml` file which contains a sequence of mappings with the following keys, as well as a comment
   describing the source:
 
-  * ``data_file`` holds the name of the CSV or TSV source data file.
+  * `data_file` holds the name of the CSV or TSV source data file.
 
-  * ``has_header`` is a Boolean specifying whether the data file has a header line (default: `true`).
+  * `has_header` is a Boolean specifying whether the data file has a header line (default: `true`).
 
   * `columns` holds a mapping whose key is the column name (or 0-based index if there are no headers), and whose value
     is a name of a namespace.
 
   The computed canonical list names are any EnsemblGene identifiers that are agreed on by the identifiers in all the
   columns of each list entry. For other namespaces, these are the identifiers that map to any of these EnsemblGenes.
-  This is computed using ``scripts/compute_list.py``.
+  This is computed using `scripts/compute_list.py`.
 
 ## Namespaces
 
@@ -341,19 +361,22 @@ following data model for handling gene namespaces:
   mappings bring us closer towards the EnsemblGene namespace.
 
 To compute all the above, we begin with a set of "source of truth" files. These are TSV or CSV files under the `sources`
-sub-directory which have at least two column containing names, to establish links between names (within the same
+sub-directory which have at least two columns containing names, to establish links between names (within the same
 namespace or across namespaces).
 
 We use a `sources.yaml` file which contains a sequence of mappings with the following keys, as well as a comment
 describing the source:
 
-* ``data_file`` holds the name of the CSV or TSV source data file. We omit the `.csv` or `.tsv` suffix when we identify
+* `data_file` holds the name of the CSV or TSV source data file. We omit the `.csv` or `.tsv` suffix when we identify
   the source in provenance fields.
+
+* `has_header` is a Boolean specifying whether the data file has a header line (default: `true`).
 
 * `links` holds a sequence of directed links between two identifiers. Each is a mapping with the keys `from`, `to` which
   contains a mapping with the following keys:
 
-  * `column` identifies the column containing the identifier.
+  * `column` identifies the column containing the identifier, by name (or 0-based index if there is no header line).
+    It may also be a list of such columns. These are tried in order until one of them is not empty.
   * `namespace` contains the name of the namespace the identifier belongs to.
   * `separator` is an optional character used to separate multiple identifiers within the column (e.g., `|`).
 
@@ -363,12 +386,13 @@ or between a namespace and EnsemblGene (or a namespace closer to EnsemblGene).
 In addition to the above, the `sources` sub-directory optionally contains the following:
 
 * _namespace_`.Missing.tsv` contains names and sources we have seen (in some list or data set) that do not exist in any
-  of the source files. This is a temporary file which is read and deleted by ``scripts/complete_namespace.py``. This
+  of the source files. This is a temporary file which is read and deleted by `scripts/complete_namespaces.py`. This
   happens because some namespaces (Ensembl!) do not list all the names they actually know about in their "dump the whole
   database" data, because "reasons".
 
-* _namespace_`.Extra.tsv` contain names and sources for missing names that we fetched from web APIs (using
-  ``scripts/complete_namespaces.py``).
+* _namespace_`.Extra.tsv` contains data we fetched from web APIs for missing names (using
+  `scripts/complete_namespaces.py`). Each line holds the name, its source, the namespace and name it maps to, and the
+  URL of the web API call.
 
 * _namespace_`.Ignored.tsv` contains names and sources that we have looked up in the web APIs and couldn't find any data
   for. These names are *not* included in the namespace. Ideally, there shouldn't be any such names. In the best case,
@@ -393,7 +417,7 @@ To represent the result, in the `names` sub-directory we keep the following file
     `Ensembl.HGNC`.
 
 We follow all the links, including the extra data, and compute for every identifier, in every namespace, the possible
-EnsemblGenes it may map to. This computation is done by ``scripts/compute_namespaces.py``.
+EnsemblGenes it may map to. This computation is done by `scripts/compute_namespaces.py`.
 
 ## Updates
 

@@ -1,7 +1,7 @@
 This directory holds the sources of the genes namespaces:
 
 * `sources.yaml` lists the source files and how to process them.
-* `<name>.csv` and/or `<name>.tsv` are comma-seperated or tab-seperated data source files. The `<name>` typically
+* `<name>.csv` and/or `<name>.tsv` are comma-separated or tab-separated data source files. The `<name>` is typically
   based on the name(s) of the relevant namespaces it contains data for.
 * `<name>.Extra.tsv` contains names of genes that did not appear in any of the data sources, but that we managed to find
   data for using web API calls for the specific gene. We only know about such genes because at some point we saw them
