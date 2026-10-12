@@ -1,9 +1,27 @@
 # Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.tsv
+# The `Ensembl.*.<release>.tsv` files are created by `scripts/fetch_ensembl.py human 76 <release>`. It reads the
+# MySQL dumps of the core database at https://ftp.ensembl.org/pub/release-<release>/mysql/. Only the last release is
+# kept, except for the gene names, which come from every release since 76 (the first one using GRCh38).
+#
+# The transcripts and proteins of each current gene, as BioMart lists them, split by whether the gene is on the
+# reference (primary) assembly. A name which is connected to a reference gene is connected only to the reference ones
+# (and not to the copies of a gene on alternate haplotypes, or to retired genes).
+- data_file: Ensembl.Reference.{version}.tsv
+  is_reference: true
+  links:
+  - from:
+      column: Transcript stable ID
+      namespace: EnsemblTranscript
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+  - from:
+      column: Protein stable ID
+      namespace: EnsemblProtein
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+- data_file: Ensembl.NonReference.{version}.tsv
   links:
   - from:
       column: Transcript stable ID
@@ -18,54 +36,40 @@
       column: Gene stable ID
       namespace: EnsemblGene
 
-# Ensembl https://www.ensembl.org/index.html
-# Downloaded URL: https://ftp.ensembl.org/pub/release-112/mysql/homo_sapiens_core_112_38/stable_id_event.txt.gz
-# This is a dump of the `stable_id_event` table. It has no header line, and its columns are `old_stable_id`,
-# `old_version`, `new_stable_id`, `new_version`, `mapping_session_id`, `type` and `score`; we only use the two
-# stable identifier columns.
-# The download itself is not kept here (it is 126MB). It was split by identifier prefix into the three files
-# below, which is an exact partition of its 2636483 lines:
-#     grep ENSG stable_id_event.txt > Ensembl.Genes.tsv        #  607024 lines
-#     grep ENST stable_id_event.txt > Ensembl.Transcripts.tsv  # 1436219 lines
-#     grep ENSP stable_id_event.txt > Ensembl.Proteins.tsv     #  593240 lines
-# We then removed three lines from Ensembl.Transcripts.tsv. They carry transcript identifiers but are typed
-# `translation`, which is an error in the Ensembl data (the mouse dump has no such lines):
-#     \N               \N  ENST00000515292  1  417  translation  0
-#     ENST00000515292  1   ENST00000516410  1  418  translation  0.99
-#     \N               \N  ENST00000516411  1  418  translation  0
-- data_file: Ensembl.Genes.tsv
-  has_header: false
+# The `stable_id_event` table, split by type. We only keep the unique pairs of its `old_stable_id` and
+# `new_stable_id` columns. A few lines do not mention any identifier of their type. These are errors in the Ensembl
+# data, and are skipped.
+- data_file: Ensembl.Genes.{version}.tsv
   links:
   - from:
-      column: 0
+      column: Old stable ID
       namespace: EnsemblGene
     to:
-      column: 2
+      column: New stable ID
       namespace: EnsemblGene
-- data_file: Ensembl.Transcripts.tsv
-  has_header: false
+- data_file: Ensembl.Transcripts.{version}.tsv
   links:
   - from:
-      column: 0
+      column: Old stable ID
       namespace: EnsemblTranscript
     to:
-      column: 2
+      column: New stable ID
       namespace: EnsemblTranscript
-- data_file: Ensembl.Proteins.tsv
-  has_header: false
+- data_file: Ensembl.Proteins.{version}.tsv
   links:
   - from:
-      column: 0
+      column: Old stable ID
       namespace: EnsemblProtein
     to:
-      column: 2
+      column: New stable ID
       namespace: EnsemblProtein
 
 # HGNC (Hugo Gene Nomenclature Committee) https://www.genenames.org
-# Via: https://www.genenames.org/download/archive/
-# Downloaded URL: https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/tsv/hgnc_complete_set.txt
-# At date: 2024-07-06
-- data_file: HGNC.Current.tsv
+# The `HGNC.*.<date>.tsv` files are the monthly release of that date, created by `scripts/fetch_hgnc.sh`. It downloads
+# them from https://storage.googleapis.com/public-download-files/hgnc/archive/archive/monthly/tsv/.
+#
+# This is `hgnc_complete_set_<date>.txt`.
+- data_file: HGNC.Current.{version}.tsv
   links:
   - from:
       column: symbol
@@ -73,6 +77,7 @@
     to:
       column: hgnc_id
       namespace: HGNC
+    priority: 5
   - from:
       column: prev_symbol
       namespace: GeneSymbol
@@ -80,18 +85,19 @@
     to:
       column: symbol
       namespace: GeneSymbol
+    priority: 3
   - from:
       column: alias_symbol
       namespace: GeneSymbol
       separator: '|'
+      is_clean: false
     to:
       column: symbol
       namespace: GeneSymbol
+    priority: 2
 
-# Downloaded URL: https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/tsv/withdrawn.txt
-# At date: 2024-07-06
-# And then subject to: `sed 's/@//g;s/Entry Withdrawn/Withdrawn/g;s/|[^ ,]*//g'`
-- data_file: HGNC.Withdrawn.tsv
+# This is `withdrawn_<date>.txt`, subject to: `sed 's/@//g;s/Entry Withdrawn/Withdrawn/g;s/|[^ ,]*//g'`
+- data_file: HGNC.Withdrawn.{version}.tsv
   links:
   - from:
       column: HGNC_ID
@@ -107,13 +113,10 @@
       column: MERGED_INTO_REPORT(S) (i.e HGNC_ID
       namespace: HGNC
       separator: ','
+    priority: 3
 
-# Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.HGNC.tsv
+# Ensembl (see above): the HGNC xrefs of each gene, as BioMart lists them.
+- data_file: Ensembl.HGNC.{version}.tsv
   links:
   - from:
       column: HGNC ID
@@ -122,12 +125,8 @@
       column: Gene stable ID
       namespace: EnsemblGene
 
-# Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.UCSC.tsv
+# Ensembl (see above): the UCSC xrefs of each transcript, as BioMart lists them.
+- data_file: Ensembl.UCSC.{version}.tsv
   links:
   - from:
       column: UCSC Stable ID
@@ -136,12 +135,8 @@
       column: Gene stable ID
       namespace: EnsemblGene
 
-# Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.RefSeq_mRNA.tsv
+# Ensembl (see above): the RefSeq xrefs of each transcript or protein, as BioMart lists them.
+- data_file: Ensembl.RefSeq_mRNA.{version}.tsv
   links:
   - from:
       column: RefSeq mRNA ID
@@ -149,13 +144,7 @@
     to:
       column: Gene stable ID
       namespace: EnsemblGene
-
-# Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.RefSeq_ncRNA.tsv
+- data_file: Ensembl.RefSeq_ncRNA.{version}.tsv
   links:
   - from:
       column: RefSeq ncRNA ID
@@ -163,13 +152,7 @@
     to:
       column: Gene stable ID
       namespace: EnsemblGene
-
-# Ensembl https://www.ensembl.org/index.html
-# Download via: https://www.ensembl.org/biomart/martview
-#   Ensembl Genes 112
-#   Human genes (GRCh38.p14)
-# Each column is a selected attribute.
-- data_file: Ensembl.RefSeq_peptide.tsv
+- data_file: Ensembl.RefSeq_peptide.{version}.tsv
   links:
   - from:
       column: RefSeq peptide ID
@@ -177,3 +160,19 @@
     to:
       column: Gene stable ID
       namespace: EnsemblGene
+
+# Ensembl (see above): the name of each gene in each release (its `display_xref_id`). Ensembl does not keep the
+# history of these names. Later releases drop many of them, such as the clone-based names like `AC092171.3`. Some
+# names move to a different gene. Each name is taken only from the newest release which has it. A release whose names
+# all appear in newer releases is removed by `scripts/fetch_ensembl.py`.
+- data_file: Ensembl.GeneName.{version}.tsv
+  has_multiple_versions: true
+  older_versions_priority: 1
+  links:
+  - from:
+      column: Gene name
+      namespace: GeneSymbol
+    to:
+      column: Gene stable ID
+      namespace: EnsemblGene
+    priority: 4

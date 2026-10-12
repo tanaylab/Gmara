@@ -6,68 +6,6 @@ Load EnsemblProtein namespace ...
 Load EnsemblGene namespace ...
 Load EnsemblTranscript namespace ...
 Load CURATED.tsv ...
-The columns of CURATED#5 match multiple EnsemblGenes:
-  ENSG00000118520 via: CURATED:5[0];HGNC.Current:1429[1];HGNC.Current:1429[1>0];Ensembl.HGNC:210990[3>0]
-  ENSG00000142910 via: CURATED:5[0];HGNC.Current:1429[1];HGNC.Current:38928[8>1];HGNC.Current:38928[1];HGNC.Current:38928[1>0];Ensembl.HGNC:175588[3>0]
-The columns of CURATED#10 match multiple EnsemblGenes:
-  ENSG00000156273 via: CURATED:10[0];HGNC.Current:2206[1];HGNC.Current:2206[1>0];Ensembl.HGNC:2711[3>0]
-  ENSG00000136492 via: CURATED:10[0];HGNC.Current:2206[1];HGNC.Current:2696[8>1];HGNC.Current:2696[1];HGNC.Current:2696[1>0];Ensembl.HGNC:174538[3>0]
-The columns of CURATED#23 match multiple EnsemblGenes:
-  ENSG00000217555 via: CURATED:23[0];HGNC.Current:4824[1];HGNC.Current:4824[1>0];Ensembl.HGNC:121272[3>0]
-  ENSG00000102554 via: CURATED:23[0];HGNC.Current:4824[1];HGNC.Current:14133[8>1];HGNC.Current:14133[1];HGNC.Current:14133[1>0];Ensembl.HGNC:2993[3>0]
-The columns of CURATED#42 match multiple EnsemblGenes:
-  ENSG00000120690 via: CURATED:42[0];HGNC.Current:7810[1];HGNC.Current:7810[1>0];Ensembl.HGNC:2739[3>0]
-  ENSG00000130165 via: CURATED:42[0];HGNC.Current:7810[1];HGNC.Current:7894[8>1];HGNC.Current:7894[1];HGNC.Current:7894[1>0];Ensembl.HGNC:208723[3>0]
-The columns of CURATED#79 match multiple EnsemblGenes:
-  ENSG00000285109 via: CURATED:79[0];HGNC.Current:10072[1];HGNC.Current:10072[1>0];Ensembl.HGNC:32079[3>0]
-  ENSG00000136574 via: CURATED:79[0];HGNC.Current:10072[1];HGNC.Current:10072[1>0];Ensembl.HGNC:117007[3>0]
-The columns of CURATED#90 match multiple EnsemblGenes:
-  ENSG00000114315 via: CURATED:90[0];HGNC.Current:11563[1];HGNC.Current:11563[1>0];Ensembl.HGNC:262356[3>0]
-  ENSG00000160221 via: CURATED:90[0];HGNC.Current:11563[1];HGNC.Current:10083[8>1];HGNC.Current:10083[1];HGNC.Current:10083[1>0];Ensembl.HGNC:25032[3>0]
-The columns of CURATED#92 match multiple EnsemblGenes:
-  ENSG00000197921 via: CURATED:92[0];HGNC.Current:11567[1];HGNC.Current:11567[1>0];Ensembl.HGNC:39975[3>0]
-  ENSG00000273529 via: CURATED:92[0];HGNC.Current:11567[1];HGNC.Current:11567[1>0];Ensembl.HGNC:75106[3>0]
-The columns of CURATED#97 match multiple EnsemblGenes:
-  ENSG00000108924 via: CURATED:97[0];HGNC.Current:11726[1];HGNC.Current:11726[1>0];Ensembl.HGNC:252335[3>0]
-  ENSG00000116016 via: CURATED:97[0];HGNC.Current:11726[1];HGNC.Current:8043[8>1];HGNC.Current:8043[1];HGNC.Current:8043[1>0];Ensembl.HGNC:52410[3>0]
-The columns of CURATED#123 match multiple EnsemblGenes:
-  ENSG00000283060 via: CURATED:123[0];HGNC.Current:12534[1];HGNC.Current:12534[1>0];Ensembl.HGNC:77361[3>0]
-  ENSG00000117318 via: CURATED:123[0];HGNC.Current:12534[1];HGNC.Current:12534[1>0];Ensembl.HGNC:117025[3>0]
-The columns of CURATED#130 match multiple EnsemblGenes:
-  ENSG00000276561 via: CURATED:130[0];HGNC.Current:13505[1];HGNC.Current:13505[1>0];Ensembl.HGNC:32151[3>0]
-  ENSG00000185507 via: CURATED:130[0];HGNC.Current:13505[1];HGNC.Current:13505[1>0];Ensembl.HGNC:231997[3>0]
-The columns of CURATED#141 match multiple EnsemblGenes:
-  ENSG00000275746 via: CURATED:141[0];HGNC.Current:14146[1];HGNC.Current:14146[1>0];Ensembl.HGNC:43059[3>0]
-  ENSG00000169926 via: CURATED:141[0];HGNC.Current:14146[1];HGNC.Current:14146[1>0];Ensembl.HGNC:98850[3>0]
-The columns of CURATED#151 match multiple EnsemblGenes:
-  ENSG00000274577 via: CURATED:151[0];HGNC.Current:14926[1];HGNC.Current:14926[1>0];Ensembl.HGNC:60516[3>0]
-  ENSG00000273706 via: CURATED:151[0];HGNC.Current:14926[1];HGNC.Current:14926[1>0];Ensembl.HGNC:140197[3>0]
-The columns of CURATED#163 match multiple EnsemblGenes:
-  ENSG00000291761 via: CURATED:163[0];HGNC.Current:18382[1];HGNC.Current:18382[1>0];Ensembl.HGNC:19939[3>0]
-  ENSG00000116604 via: CURATED:163[0];HGNC.Current:18382[1];HGNC.Current:18382[1>0];Ensembl.HGNC:243358[3>0]
-The columns of CURATED#218 match multiple EnsemblGenes:
-  ENSG00000231321 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:111135[3>0]
-  ENSG00000227322 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:127023[3>0]
-  ENSG00000204231 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:132824[3>0]
-  ENSG00000228333 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:141878[3>0]
-  ENSG00000235712 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:154394[3>0]
-  ENSG00000206289 via: CURATED:218[0];HGNC.Current:34480[1];HGNC.Current:34480[1>0];Ensembl.HGNC:159249[3>0]
-The columns of CURATED#232 match multiple EnsemblGenes:
-  ENSG00000285438 via: CURATED:232[0];HGNC.Current:37141[1];HGNC.Current:37141[1>0];Ensembl.HGNC:32344[3>0]
-  ENSG00000171056 via: CURATED:232[0];HGNC.Current:37141[1];HGNC.Current:37141[1>0];Ensembl.HGNC:195500[3>0]
-The columns of CURATED#253 match multiple EnsemblGenes:
-  ENSG00000071564 via: CURATED:253[0];HGNC.Current:38508[1];HGNC.Current:38508[1>0];Ensembl.HGNC:224257[3>0]
-  ENSG00000152284 via: CURATED:253[0];HGNC.Current:38508[1];HGNC.Current:38514[10>1];HGNC.Current:38514[1];HGNC.Current:38514[1>0];Ensembl.HGNC:54909[3>0]
-  ENSG00000292149 via: CURATED:253[0];HGNC.Current:38508[1];HGNC.Current:38514[10>1];HGNC.Current:38514[1];HGNC.Current:38514[1>0];Ensembl.HGNC:85177[3>0]
-The columns of CURATED#254 match multiple EnsemblGenes:
-  ENSG00000196628 via: CURATED:254[0];HGNC.Current:38510[1];HGNC.Current:38510[1>0];Ensembl.HGNC:12536[3>0]
-  ENSG00000148737 via: CURATED:254[0];HGNC.Current:38510[1];HGNC.Current:38516[10>1];HGNC.Current:38516[1];HGNC.Current:38516[1>0];Ensembl.HGNC:152776[3>0]
-The columns of CURATED#265 match multiple EnsemblGenes:
-  ENSG00000288335 via: CURATED:265[0];HGNC.Current:41287[1];HGNC.Current:41287[1>0];Ensembl.HGNC:26844[3>0]
-  ENSG00000233608 via: CURATED:265[0];HGNC.Current:41287[1];HGNC.Current:41287[1>0];Ensembl.HGNC:271493[3>0]
-The columns of CURATED#268 match multiple EnsemblGenes:
-  ENSG00000100219 via: CURATED:268[0];HGNC.Current:42573[1];HGNC.Current:42573[1>0];Ensembl.HGNC:102325[3>0]
-  ENSG00000249947 via: CURATED:268[0];HGNC.Current:42573[1];HGNC.Current:42574[10>1];HGNC.Current:42574[1];HGNC.Current:42574[1>0];Ensembl.HGNC:203557[3>0]
 Write names/HGNC.tsv ...
 Write names/GeneSymbol.tsv ...
 Write names/UCSC.tsv ...

@@ -1,0 +1,18 @@
+# Manually curated list.
+# Column 1 says why each gene is in the list:
+# - "2026 atlases survey": The lateral_fraction of the gene is above 0.5 in the human atlases survey. The survey data
+#   (atlas.human.csv) is not kept here. Genes in the ribosomal and mitochondrial lists are excluded.
+# - "ribosomal": FAU and UBA52. They encode ribosomal proteins fused to ubiquitin(-like) proteins.
+- data_file: CURATED.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+
+# Derived from the HGNC namespace source by `scripts/derive_human_lateral.py`.
+# The mitochondrial ribosomal proteins: the HGNC gene groups 646, 1994 and 1996.
+# Column 2 is the provenance of each gene in the HGNC namespace source.
+- data_file: HGNC.Current.{version}.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+    1: HGNC

@@ -1,17 +1,18 @@
 # University of Toronto paper by Samuel Lambert et al.
 # Via: https://humantfs.ccbr.utoronto.ca/
-# Downloaded URL: https://humantfs.ccbr.utoronto.ca/download/v_1.01/DatabaseExtract_v_1.01.csv
-# Post-processing:
-# - Manually filtered by `Is TF?` == `Yes`
-# - Changed DUX1_HUMAN and DUX3_HUMAN to empty string (no Ensembl ID).
-- data_file: Toronto.csv
+# The `Toronto.<version>.csv` file is created by `scripts/fetch_toronto.py`. It downloads
+# https://humantfs.ccbr.utoronto.ca/download/v_<version>/DatabaseExtract_v_<version>.csv. Post-processing:
+# - Keep only the lines whose `Is TF?` is `Yes`.
+# - Change DUX1_HUMAN and DUX3_HUMAN to empty string (no Ensembl ID).
+- data_file: Toronto.{version}.csv
   columns:
     Ensembl ID: EnsemblGene
     HGNC symbol: GeneSymbol
 
 # SCENIC https://scenic.aertslab.org/
-# Downloaded URL: https://resources.aertslab.org/cistarget/tf_lists/allTFs_hg38.txt
-- data_file: SCENIC.tsv
+# The `SCENIC.<date>.tsv` file is https://resources.aertslab.org/cistarget/tf_lists/allTFs_hg38.txt, created by
+# `scripts/fetch_scenic.sh human`. SCENIC does not version this list, so the date is when it was last modified.
+- data_file: SCENIC.{version}.tsv
   has_header: false
   columns:
     0: GeneSymbol

@@ -1,7 +1,5 @@
-A list of [transcription factor
-genes](https://en.wikipedia.org/wiki/Transcription_factor). This is inclusive,
-that is, most anything that attaches to the DNA in one way or another will be
-listed.
+A list of [transcription factor genes](https://en.wikipedia.org/wiki/Transcription_factor).
+This is a very unrestrictive list, it includes anything that conceivably binds to DNA.
 
 This directory holds:
 

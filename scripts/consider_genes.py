@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import gene_names
 import os.path
 import pandas as pd
 import provenance
@@ -29,7 +30,7 @@ class Names:
         print(f"Load {list_path} ...", flush = True)
         with open(list_path) as file:
             for gene_name in file.readlines():
-                gene_name = normalize_name(namespace_name, gene_name[:-1])
+                gene_name = gene_names.normalize_name(namespace_name, gene_name[:-1])
                 self.gene_names.append(gene_name)
 
     def verify_names(self):
@@ -62,14 +63,6 @@ class Names:
                 for gene_name in sorted(new_missing_names):
                     print(f"The gene: '{gene_name}' is added to missing from the namespace: {self.namespace.name}", flush = True)
                     print(f"{gene_name}\t{provenance.origin(self.source_name, '0')}", file = file)
-
-def normalize_name(namespace_name, name):
-    if namespace_name == "UCSC":
-        return name
-    parts = name.split(".")
-    if len(parts) == 2:
-        name = parts[0]
-    return name
 
 def main():
     assert len(sys.argv) >= 3, "Usage: consider_genes.py species namespace source_name list_file..."

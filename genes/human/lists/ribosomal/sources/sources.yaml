@@ -1,0 +1,9 @@
+# Derived from the HGNC namespace source by `scripts/derive_human_ribosomal.py`.
+# The HGNC gene groups 728 (S ribosomal proteins) and 729 (L ribosomal proteins). FAU and UBA52 are excluded. They
+# encode ribosomal proteins fused to ubiquitin(-like) proteins. They are in the lateral list instead.
+# Column 2 is the provenance of each gene in the HGNC namespace source.
+- data_file: HGNC.Current.{version}.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+    1: HGNC

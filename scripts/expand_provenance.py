@@ -2,12 +2,22 @@
 
 import os.path
 import provenance
+import source_files
 import sys
 import yaml
 
 from glob import glob
 
-HEADER = "name\tsource\tensembl_gene\tensembl_source"
+# The columns of the namespace names files.
+NAMESPACE_COLUMNS = ["name", "ensembl_gene", "name_source", "name_mapping"]
+
+# The columns of the list names files.
+LIST_COLUMNS = [
+    "name", "ensembl_gene", "list_name", "name_source", "name_mapping", "list_source", "list_mapping", "common_mapping"
+]
+
+# The columns which do not hold provenance.
+VALUE_COLUMNS = ("name", "ensembl_gene", "list_name")
 
 class Source:
     def __init__(self, path, has_header):
@@ -25,33 +35,33 @@ def collect_sources(species):
     return sources
 
 def collect_sources_dir(sources, sources_dir, list_name):
-    with open(f"{sources_dir}/sources.yaml") as file:
-        sources_spec = yaml.safe_load(file)
-
-    for source_spec in sources_spec:
+    for source_spec in source_files.load_specs(sources_dir):
         data_file = source_spec["data_file"]
         source_name = data_file[:data_file.rindex(".")]
+        if list_name is not None:
+            source_name = f"{list_name}/{source_name}"
         source = Source(f"{sources_dir}/{data_file}", source_spec.get("has_header", True))
         assert source_name not in sources, f"ambiguous source: {source_name}"
         sources[source_name] = source
-        if list_name is not None:
-            sources[f"{list_name}/{source_name}"] = source
 
+# Return each row (of a namespace or a list names file) as a dictionary by column name.
 def collect_rows(lines):
     rows = []
     for line in lines:
-        line = line.rstrip("\n")
-        if line != HEADER:
-            fields = line.split("\t")
-            assert len(fields) == 4, f"not a names file line: {line}"
-            rows.append(fields)
+        fields = line.rstrip("\n").split("\t")
+        if fields not in (NAMESPACE_COLUMNS, LIST_COLUMNS):
+            columns = NAMESPACE_COLUMNS if len(fields) == len(NAMESPACE_COLUMNS) else LIST_COLUMNS
+            assert len(fields) == len(columns), f"not a names file line: {line}"
+            rows.append(dict(zip(columns, fields)))
     return rows
 
 # The lines we need are scattered all over source data files which are far too large to hold in memory, so we first
 # collect the lines all the rows ask for, and only then scan each of the source data files once.
 def fetch_cells(sources, rows):
-    for name, source_name, ensembl_gene, ensembl_source in rows:
-        for provenance_text in (source_name, ensembl_source):
+    for row in rows:
+        for column, provenance_text in row.items():
+            if column in VALUE_COLUMNS:
+                continue
             for step in provenance_text.split(provenance.JOIN):
                 match = provenance.STEP.fullmatch(step)
                 if match is not None:
@@ -72,17 +82,17 @@ def fetch_source_cells(source):
             if line in source.cells:
                 source.cells[line] = cells
 
+# The name and the EnsemblGene come first, followed by the other columns in the order of the names file.
 def expand_row(sources, row):
-    name, source_name, ensembl_gene, ensembl_source = row
-    return {
-        "name": name,
-        "ensembl_gene": ensembl_gene,
-        "source": expand_provenance(sources, source_name),
-        "ensembl_source": expand_provenance(sources, ensembl_source),
-    }
+    expanded = {"name": row["name"], "ensembl_gene": row["ensembl_gene"]}
+    for column, text in row.items():
+        if column not in expanded:
+            expanded[column] = text if column in VALUE_COLUMNS else expand_provenance(sources, text)
+    return expanded
 
+# An empty provenance (a lone `JOIN`) has no steps.
 def expand_provenance(sources, provenance_text):
-    return [expand_step(sources, text) for text in provenance_text.split(provenance.JOIN)]
+    return [expand_step(sources, text) for text in provenance_text.split(provenance.JOIN) if text != ""]
 
 def expand_step(sources, text):
     match = provenance.STEP.fullmatch(text)
@@ -108,20 +118,15 @@ def expand_step(sources, text):
 
     return step
 
-def named_columns(source, columns):
+def named_columns(source, column):
     """
-    Return the name of the source data file CSV column(s), or their index if it has no header line - a single name
-    for a single CSV column, and a list of names for a list of alternative CSV columns.
+    Return the name of the source data file CSV column, or its index if it has no header line.
     """
-    names = [column if source.header is None else source.header[int(column)]
-             for column in columns.split(provenance.ALTERNATIVE)]
-    return names[0] if len(names) == 1 else names
+    return column if source.header is None else source.header[int(column)]
 
 def value_of(cells, columns):
-    for index in provenance.value_indices(columns):
-        if index < len(cells) and cells[index] != "":
-            return cells[index]
-    return ""
+    index = provenance.value_index(columns)
+    return cells[index] if index < len(cells) else ""
 
 def main():
     assert len(sys.argv) >= 2, "Usage: expand_provenance.py species [names_file ...]"

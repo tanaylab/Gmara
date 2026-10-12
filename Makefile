@@ -1,13 +1,16 @@
 SPECIES = human mouse
 
-human_LISTS = transcription_factor regulator
-mouse_LISTS = transcription_factor regulator
+human_LISTS = transcription_factor regulator ribosomal mitochondrial lateral
+mouse_LISTS = transcription_factor regulator ribosomal mitochondrial lateral
 
 .PHONY: all
 .PHONY: complete
 .PHONY: namespaces
 .PHONY: lists
 .PHONY: clean
+
+# Delete the log file of a failed step, so the next `make` runs it again.
+.DELETE_ON_ERROR:
 
 all: complete namespaces lists
 
@@ -24,7 +27,7 @@ namespaces: $(1)_namespaces
 .PHONY: $(1)_complete
 $(1)_complete: genes/$(1)/namespaces/log.complete.txt
 
-genes/$(1)/namespaces/log.complete.txt: scripts/complete_namespaces.py \
+genes/$(1)/namespaces/log.complete.txt: scripts/complete_namespaces.py scripts/gene_names.py \
     $(wildcard genes/$(1)/namespaces/sources/*.Missing.tsv)
 	set -o pipefail && scripts/complete_namespaces.py $(1) 2>&1 | tee genes/$(1)/namespaces/log.complete.txt
 
@@ -32,6 +35,7 @@ genes/$(1)/namespaces/log.complete.txt: scripts/complete_namespaces.py \
 $(1)_namespaces: genes/$(1)/namespaces/log.txt
 
 genes/$(1)/namespaces/log.txt: scripts/compute_namespaces.py \
+    scripts/gene_names.py scripts/provenance.py scripts/source_files.py \
     $(filter-out %.Missing.tsv,$(filter-out %README.md,$(wildcard genes/$(1)/namespaces/sources/*)))
 	set -o pipefail && scripts/compute_namespaces.py $(1) 2>&1 | tee genes/$(1)/namespaces/log.txt
 
@@ -49,8 +53,14 @@ define SPECIES_LIST_RULES
 genes/$(1)/lists/log.txt: genes/$(1)/lists/$(2)/log.txt
 
 genes/$(1)/lists/$(2)/log.txt: scripts/compute_list.py genes/$(1)/namespaces/log.txt \
-    $(filter-out %.Missing.tsv,$(filter-out %README.md,$(wildcard genes/$(1)/lists/$(2)/sources/*)))
+    scripts/gene_names.py scripts/provenance.py scripts/source_files.py \
+    $(filter-out %.Missing.tsv,$(filter-out %README.md,$(wildcard genes/$(1)/lists/$(2)/sources/*))) \
+    $(if $(wildcard scripts/derive_$(1)_$(2).py),genes/$(1)/lists/$(2)/log.derive.txt)
 	set -o pipefail && scripts/compute_list.py $(1) $(2) 2>&1 | tee genes/$(1)/lists/$(2)/log.txt
+
+genes/$(1)/lists/$(2)/log.derive.txt: scripts/derive_$(1)_$(2).py scripts/provenance.py scripts/source_files.py \
+    $(filter-out %.Missing.tsv,$(filter-out %README.md,$(wildcard genes/$(1)/namespaces/sources/*)))
+	set -o pipefail && scripts/derive_$(1)_$(2).py 2>&1 | tee genes/$(1)/lists/$(2)/log.derive.txt
 endef
 
 

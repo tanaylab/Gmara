@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import gene_names
 import json
 import os
 import pandas as pd
@@ -32,12 +33,12 @@ def complete_namespace(namespace_name, sources_dir):
     ignored_path = f"{sources_dir}/{namespace_name}.Ignored.tsv"
     if os.path.isfile(ignored_path):
         frame = pd.read_csv(ignored_path, dtype = str, keep_default_na = False, header = None, sep = "\t")
-        ignored_names = set([normalize_name(namespace_name, gene_name) for gene_name in frame.iloc[:, 0]])
+        ignored_names = set([gene_names.normalize_name(namespace_name, gene_name) for gene_name in frame.iloc[:, 0]])
     else:
         ignored_names = set()
 
     for gene_name, source_name in sorted(missing_genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
-        gene_name = normalize_name(namespace_name, gene_name)
+        gene_name = gene_names.normalize_name(namespace_name, gene_name)
         if gene_name not in ignored_names \
                 and (complete_function is None or not complete_function(sources_dir, gene_name, source_name)):
             ignored_names.add(gene_name)
@@ -56,11 +57,11 @@ def complete_EnsemblGene(sources_dir, ensembl_id, source_name):
 
     active_ids = set()
     for datum in data:
-        stable_id = normalize_name("EnsemblGene", datum.get("stable_id", ensembl_id))
+        stable_id = gene_names.normalize_name("EnsemblGene", datum.get("stable_id", ensembl_id))
         if stable_id != ensembl_id:
             active_ids.add(stable_id)
         for gene in datum.get("genes", []):
-            stable_id = normalize_name("EnsemblGene", gene.get("stable_id", ensembl_id))
+            stable_id = gene_names.normalize_name("EnsemblGene", gene.get("stable_id", ensembl_id))
             if stable_id != ensembl_id:
                 active_ids.add(stable_id)
 
@@ -81,15 +82,6 @@ def ensembl_namespace_of(ensemnl_id):
     if ensemnl_id.startswith("ENSP") or ensemnl_id.startswith("ENSMUSP"):
         return "EnsemblProtein"
     assert False, f"Don't know the namespace for the Ensembl identifier: {ensemnl_id}"
-
-def normalize_name(namespace_name, name):
-    if namespace_name == "UCSC":
-        return name
-    parts = name.split(".")
-    if len(parts) == 2:
-        return parts[0]
-    else:
-        return name
 
 def store_extra(sources_dir, extra_path, gene_name, other_namespace_name, other_gene_name, source_name, link_source_name):
     with open(f"{sources_dir}/{extra_path}", "a+") as file:

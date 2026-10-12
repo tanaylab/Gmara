@@ -1,0 +1,19 @@
+# Manually curated list.
+# Column 1 says why each gene is in the list:
+# - "2026 atlases survey": The lateral_fraction of the gene is above 0.5 in the mouse atlases survey. The survey data
+#   (atlas.mouse.csv) is not kept here. Genes in the ribosomal and mitochondrial lists are excluded.
+# - "ribosomal": Fau, Uba52 and Uba52rt. They encode ribosomal proteins fused to ubiquitin(-like) proteins.
+# - "mitochondrial ribosomal": Mitochondrial ribosomal proteins which MGI names for another function (such as Dap3).
+- data_file: CURATED.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+
+# Derived from the MGI namespace source by `scripts/derive_mouse_lateral.py`.
+# The current protein-coding markers named as mitochondrial ribosomal proteins.
+# Column 2 is the provenance of each gene in the MGI namespace source.
+- data_file: MGI.{version}.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+    1: MGI

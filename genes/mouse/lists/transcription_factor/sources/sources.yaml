@@ -1,6 +1,7 @@
 # SCENIC https://scenic.aertslab.org/
-# Downloaded URL: https://resources.aertslab.org/cistarget/tf_lists/allTFs_mm.txt
-- data_file: SCENIC.tsv
+# The `SCENIC.<date>.tsv` file is https://resources.aertslab.org/cistarget/tf_lists/allTFs_mm.txt, created by
+# `scripts/fetch_scenic.sh mouse`. SCENIC does not version this list, so the date is when it was last modified.
+- data_file: SCENIC.{version}.tsv
   has_header: false
   columns:
     0: GeneSymbol

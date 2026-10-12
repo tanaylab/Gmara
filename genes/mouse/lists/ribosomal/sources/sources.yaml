@@ -1,0 +1,10 @@
+# Derived from the MGI namespace source by `scripts/derive_mouse_ribosomal.py`.
+# The current protein-coding markers whose Marker Name starts with "ribosomal protein L", "ribosomal protein S" or
+# "ribosomal protein lateral stalk". Names containing "kinase" or "binding protein" are excluded. This includes
+# retrotransposed copies (e.g. Rpl27rt), which MGI types as protein-coding.
+# Column 2 is the provenance of each gene in the MGI namespace source.
+- data_file: MGI.{version}.tsv
+  has_header: false
+  columns:
+    0: GeneSymbol
+    1: MGI

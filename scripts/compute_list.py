@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
+import gene_names
 import os.path
 import pandas as pd
 import provenance
 import re
 import shutil
+import source_files
 import sys
-import yaml
 
 from glob import glob
 
@@ -27,8 +28,12 @@ class Namespace:
 
         names_path = f"{namespaces_dir}/names/{namespace_name}.tsv"
         frame = pd.read_csv(names_path, dtype = str, keep_default_na = False, header = "infer", sep = "\t")
-        for gene_name, source_name, ensembl_gene, ensembl_source \
-        in zip(frame.loc[:, "name"], frame.loc[:, "source"], frame.loc[:, "ensembl_gene"], frame.loc[:, "ensembl_source"]):
+        for gene_name, source_name, ensembl_gene, ensembl_source in zip(
+            frame.loc[:, "name"],
+            frame.loc[:, "name_source"],
+            frame.loc[:, "ensembl_gene"],
+            frame.loc[:, "name_mapping"],
+        ):
             if gene_name not in self.genes:
                 self.genes[gene_name] = Gene(gene_name, source_name)
             self.genes[gene_name].ensembl_genes[ensembl_gene] = ensembl_source
@@ -36,7 +41,8 @@ class Namespace:
         ignored_path = f"{namespaces_dir}/sources/{namespace_name}.Ignored.tsv"
         if os.path.isfile(ignored_path):
             frame = pd.read_csv(ignored_path, dtype = str, keep_default_na = False, header = None, sep = "\t")
-            self.ignored_genes = set([normalize_name(namespace_name, gene_name) for gene_name in frame.iloc[:, 0]])
+            self.ignored_genes = set([gene_names.normalize_name(namespace_name, gene_name)
+                                      for gene_name in frame.iloc[:, 0]])
         else:
             self.ignored_genes = set()
         self.ignored_genes.add("")
@@ -81,7 +87,7 @@ class Names:
             else:
                 gene_names = frame.loc[:, column_name].values
             n_rows = len(gene_names)
-            columns.append((column_name, provenance.columns_of(frame, column_name), namespace_name, gene_names))
+            columns.append((column_name, provenance.csv_column_of(frame, column_name), namespace_name, gene_names))
 
         for row in range(n_rows):
             ensembl_genes = None
@@ -98,11 +104,11 @@ class Names:
                 else:
                     if len(ensembl_genes) > 1:
                         print(f"The columns of {source_name}#{row + 1} match multiple EnsemblGenes:")
-                        for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():
-                            print(f"  {ensembl_gene_name} via: {ensembl_source_name}")
-                    for ensembl_gene_name, ensembl_source_name in ensembl_genes.items():
+                        for ensembl_gene_name, (list_gene_name, ensembl_source_name) in ensembl_genes.items():
+                            print(f"  {ensembl_gene_name} via: {list_gene_name} {ensembl_source_name}")
+                    for ensembl_gene_name, list_gene in ensembl_genes.items():
                         if ensembl_gene_name not in self.ensembl_genes:
-                            self.ensembl_genes[ensembl_gene_name] = ensembl_source_name
+                            self.ensembl_genes[ensembl_gene_name] = list_gene
 
     def compute_column_ensembl_genes(self, list_name, source_name, row, column_name, column_columns,
                                      namespace_name, gene_names, ensembl_genes):
@@ -122,6 +128,7 @@ class Names:
         if len(gene_names) == 0:
             return ensembl_genes
 
+        # The (name in the list, provenance) of each EnsemblGene.
         column_ensembl_genes = {}
         for gene_name in gene_names:
             gene = namespace.genes[gene_name]
@@ -130,10 +137,11 @@ class Names:
                     gene_source_name = ensembl_source_name
                 else:
                     gene_source_name = f"{gene.source_name}{provenance.JOIN}{ensembl_source_name}"
-                ensembl_gene_source_name = \
-                    f"{provenance.step(source_name, row, column_columns)}{provenance.JOIN}{gene_source_name}"
-                if ensembl_gene_name not in column_ensembl_genes or len(ensembl_gene_source_name) < len(column_ensembl_genes[ensembl_gene_name]):
-                    column_ensembl_genes[ensembl_gene_name] = ensembl_gene_source_name
+                list_source_name = provenance.step(f"{list_name}/{source_name}", row, column_columns)
+                ensembl_gene_source_name = f"{list_source_name}{provenance.JOIN}{gene_source_name}"
+                if ensembl_gene_name not in column_ensembl_genes \
+                or len(ensembl_gene_source_name) < len(column_ensembl_genes[ensembl_gene_name][1]):
+                    column_ensembl_genes[ensembl_gene_name] = (gene_name, ensembl_gene_source_name)
                     if gene_name in TRACK_GENES:
                         print(f"TRACK {gene_name} maps to: {ensembl_gene_name} via: {ensembl_gene_source_name}")
 
@@ -155,29 +163,47 @@ class Names:
         for namespace_name, namespace in self.namespaces.items():
             print(f"Write names/{namespace_name}.tsv ...", flush = True)
             with open(f"{names_dir}/{namespace_name}.tsv", "w") as file:
-                print("name\tsource\tensembl_gene\tensembl_source", file = file)
+                print("name\tensembl_gene\tlist_name\tname_source\tname_mapping\t"
+                      "list_source\tlist_mapping\tcommon_mapping", file = file)
                 namespace = self.namespaces[namespace_name]
-                for gene_name, gene in sorted(namespace.genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
-                    for ensembl_gene_name, ensembl_source_name \
-                    in sorted(gene.ensembl_genes.items(), key = lambda item: (str.casefold(item[0]), item[0])):
-                        if ensembl_source_name != gene.source_name:
-                            ensembl_source_name = f"{gene.source_name}{provenance.JOIN}{ensembl_source_name}"
+                # Sorted by the EnsemblGene, so all the names of each gene are adjacent.
+                lines = []
+                for gene_name, gene in namespace.genes.items():
+                    # A single row per name, via the list EnsemblGene with the fewest provenance steps (and then the
+                    # smallest identifier).
+                    rows = []
+                    for ensembl_gene_name, ensembl_source_name in gene.ensembl_genes.items():
                         if ensembl_gene_name in self.ensembl_genes:
-                            print(f"{gene_name}\t{ensembl_source_name}\t{ensembl_gene_name}\t{self.ensembl_genes[ensembl_gene_name]}", file = file)
+                            if ensembl_source_name != gene.source_name:
+                                ensembl_source_name = f"{gene.source_name}{provenance.JOIN}{ensembl_source_name}"
+                            list_gene_name, list_source_name = self.ensembl_genes[ensembl_gene_name]
+                            rows.append((ensembl_source_name, ensembl_gene_name, list_source_name, list_gene_name))
+                    if len(rows) > 0:
+                        gene_source_name, ensembl_gene_name, list_source_name, list_gene_name = min(
+                            rows,
+                            key = lambda row: (provenance.count_steps(row[0]) + provenance.count_steps(row[2]), row[1]),
+                        )
+                        # The first step of each path is where the name (or the list entry) appears.
+                        name_source, *name_steps = gene_source_name.split(provenance.JOIN)
+                        list_source, *list_steps = list_source_name.split(provenance.JOIN)
+                        # The common tail of the mappings of the name and of the list entry to the EnsemblGene.
+                        common_count = 0
+                        while common_count < min(len(name_steps), len(list_steps)) \
+                        and name_steps[-1 - common_count] == list_steps[-1 - common_count]:
+                            common_count += 1
+                        name_mapping = provenance.join_steps(name_steps[:len(name_steps) - common_count])
+                        list_mapping = provenance.join_steps(list_steps[:len(list_steps) - common_count])
+                        common_mapping = provenance.join_steps(name_steps[len(name_steps) - common_count:])
+                        lines.append((
+                            ensembl_gene_name, str.casefold(gene_name), gene_name,
+                            f"{gene_name}\t{ensembl_gene_name}\t{list_gene_name}\t{name_source}\t{name_mapping}\t"
+                            f"{list_source}\t{list_mapping}\t{common_mapping}",
+                        ))
+                for line in sorted(lines):
+                    print(line[-1], file = file)
 
 def split_names(namespace_name, names):
-    return [normalize_name(namespace_name, name) for name in re.split(r"[| ,;\t]", names)]
-
-def normalize_name(namespace_name, name):
-    name = name.strip()
-    if name.upper() == "NULL":
-        return ""
-    if namespace_name == "UCSC":
-        return name
-    parts = name.split(".")
-    if len(parts) == 2:
-        name = parts[0]
-    return name
+    return [gene_names.normalize_name(namespace_name, name) for name in re.split(r"[| ,;\t]", names)]
 
 def main():
     assert len(sys.argv) == 3, "Usage: compute_list.py species list"
@@ -185,12 +211,9 @@ def main():
     list_name = sys.argv[2]
 
     sources_dir = f"genes/{species}/lists/{list_name}/sources"
-    with open(f"{sources_dir}/sources.yaml") as file:
-        sources_spec = yaml.safe_load(file)
-
     namespaces_dir = f"genes/{species}/namespaces"
     names = Names(sources_dir, namespaces_dir)
-    for source_spec in sources_spec:
+    for source_spec in source_files.load_specs(sources_dir):
         names.collect_source(list_name, source_spec)
 
     names_dir = f"genes/{species}/lists/{list_name}/names"
