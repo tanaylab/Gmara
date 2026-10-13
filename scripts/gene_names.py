@@ -18,11 +18,19 @@ NAMESPACE_PATTERNS = {
 # other namespaces, a `.` is part of the name. For example, `AC092171.3` and `AC092171.5` are different genes.
 VERSIONED_NAMESPACES = ("EnsemblGene", "EnsemblTranscript", "EnsemblProtein", "RefSeq")
 
-# A name in a namespace with a pattern is the pattern, then a `.<version>` suffix in the `VERSIONED_NAMESPACES`, then
-# junk which contains no letters or digits (such as a trailing `;`). Only the pattern is the actual name.
+# The namespaces whose names may carry a `_PAR_Y` suffix (after the version). GENCODE uses it for the copy of a gene in
+# the pseudoautosomal region of chromosome Y, while Ensembl has a single gene for both copies.
+PAR_NAMESPACES = ("EnsemblGene", "EnsemblTranscript", "EnsemblProtein")
+
+# A name in a namespace with a pattern is the pattern, then a `.<version>` suffix in the `VERSIONED_NAMESPACES`, then a
+# `_PAR_Y` suffix in the `PAR_NAMESPACES`, then junk which contains no letters or digits (such as a trailing `;`). Only
+# the pattern is the actual name.
 NAMESPACE_REGEXES = {
     namespace_name: re.compile(
-        f"({pattern})" + (r"(\.[0-9]+)?" if namespace_name in VERSIONED_NAMESPACES else "") + r"[^A-Za-z0-9]*"
+        f"({pattern})"
+        + (r"(\.[0-9]+)?" if namespace_name in VERSIONED_NAMESPACES else "")
+        + (r"(_PAR_Y)?" if namespace_name in PAR_NAMESPACES else "")
+        + r"[^A-Za-z0-9]*"
     )
     for namespace_name, pattern in NAMESPACE_PATTERNS.items()
 }
@@ -30,8 +38,9 @@ NAMESPACE_REGEXES = {
 def normalize_name(namespace_name, name):
     """
     Return the normalized ``name`` of a gene in ``namespace_name``. This strips surrounding white space, and converts
-    ``NULL`` and ``\\N`` to an empty name. In a namespace with a pattern, it also removes the ``.<version>`` suffix
-    and the trailing junk, and asserts that the rest matches the pattern. The namespace must be known.
+    ``NULL`` and ``\\N`` to an empty name. In a namespace with a pattern, it also removes the ``.<version>`` and
+    ``_PAR_Y`` suffixes and the trailing junk, and asserts that the rest matches the pattern. The namespace must be
+    known.
     """
     assert namespace_name in FREE_FORM_NAMESPACES or namespace_name in NAMESPACE_REGEXES, \
         f"Unknown namespace: {namespace_name}"

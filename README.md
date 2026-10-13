@@ -434,13 +434,14 @@ following data model for handling gene namespaces:
 
 * Stored identifiers are "normalized". Each namespace other than GeneSymbol has a pattern for its names (for example,
   `ENSG00000124766` for EnsemblGene). A name in such a namespace must start with the pattern. The pattern may be
-  followed by a `.[0-9]` version suffix (in the Ensembl and RefSeq namespaces), and then by junk which contains no
-  letters or digits (such as a trailing `;`). Normalizing removes both. In the GeneSymbol namespace, a `.[0-9]` suffix
-  is part of the name. For example, `AC092171.3` and `AC092171.5` are different genes. Names which contain white space
-  are dropped, since these are descriptions rather than names. To lookup a name in a list or a namespace, you need to
-  normalize the query gene name accordingly (see `normalize_gene_name` in Metacells.jl). The case of a name is never
-  changed. Names are in mixed case, different in different namespaces; for example, `SOX4` for the human gene and
-  `Sox4` for the mouse gene.
+  followed by a `.[0-9]` version suffix (in the Ensembl and RefSeq namespaces), then by a `_PAR_Y` suffix (in the
+  Ensembl namespaces, which GENCODE uses for the copy of a gene in the pseudoautosomal region of chromosome Y), and
+  then by junk which contains no letters or digits (such as a trailing `;`). Normalizing removes all of these. In the
+  GeneSymbol namespace, a `.[0-9]` suffix is part of the name. For example, `AC092171.3` and `AC092171.5` are
+  different genes. Names which contain white space are dropped, since these are descriptions rather than names. To
+  lookup a name in a list or a namespace, you need to normalize the query gene name accordingly (see
+  `normalize_gene_name` in Metacells.jl). The case of a name is never changed. Names are in mixed case, different in
+  different namespaces; for example, `SOX4` for the human gene and `Sox4` for the mouse gene.
 
 * We maintain *directed* mapping between the namespaces, that is, other than aliases that map a namespace to itself, all
   mappings bring us closer towards the EnsemblGene namespace.
