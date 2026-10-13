@@ -9,8 +9,9 @@ NAMESPACE_SOURCES_DIR = "genes/mouse/namespaces/sources"
 LIST_SOURCES_DIR = "genes/mouse/lists/mitochondrial/sources"
 DATA_FILE = "MGI.{version}.tsv"
 
-# The current protein-coding markers of the mitochondrial genome.
+# The current gene markers of the mitochondrial genome: the protein-coding, ribosomal RNA and transfer RNA genes.
 SYMBOL_PREFIX = "mt-"
+FEATURE_TYPES = {"protein coding gene", "rRNA gene", "tRNA gene"}
 
 def main():
     assert len(sys.argv) == 1, "Usage: derive_mouse_mitochondrial.py"
@@ -23,7 +24,7 @@ def main():
     rows = []
     for row, (symbol, mgi_id, status, feature_type) \
     in enumerate(zip(frame["Marker Symbol"], frame["MGI Accession ID"], frame["Status"], frame["Feature Type"])):
-        if symbol.startswith(SYMBOL_PREFIX) and status == "O" and feature_type == "protein coding gene":
+        if symbol.startswith(SYMBOL_PREFIX) and status == "O" and feature_type in FEATURE_TYPES:
             rows.append((symbol, mgi_id, provenance.step(source_name, row + 2, symbol_column)))
 
     source_files.write_derived(LIST_SOURCES_DIR, DATA_FILE, version_file, rows)

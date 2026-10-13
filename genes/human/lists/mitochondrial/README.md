@@ -1,4 +1,5 @@
-A list of the protein-coding genes of the [mitochondrial DNA](https://en.wikipedia.org/wiki/Mitochondrial_DNA).
+A list of the genes of the [mitochondrial DNA](https://en.wikipedia.org/wiki/Mitochondrial_DNA). These are the
+protein-coding, ribosomal RNA and transfer RNA genes.
 
 This directory holds:
 

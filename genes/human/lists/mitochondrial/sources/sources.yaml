@@ -1,6 +1,6 @@
 # Derived from the HGNC namespace source by `scripts/derive_human_mitochondrial.py`.
-# The protein-coding genes of the mitochondrial DNA. These are the MT-* symbols whose locus_type is "gene with protein
-# product".
+# The genes of the mitochondrial DNA. These are the MT-* symbols whose locus_type is "gene with protein product",
+# "RNA, ribosomal" or "RNA, transfer".
 # Column 2 is the provenance of each gene in the HGNC namespace source.
 - data_file: HGNC.Current.{version}.tsv
   has_header: false

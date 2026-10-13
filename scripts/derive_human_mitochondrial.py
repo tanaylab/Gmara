@@ -9,9 +9,9 @@ NAMESPACE_SOURCES_DIR = "genes/human/namespaces/sources"
 LIST_SOURCES_DIR = "genes/human/lists/mitochondrial/sources"
 DATA_FILE = "HGNC.Current.{version}.tsv"
 
-# The protein-coding genes of the mitochondrial genome.
+# The genes of the mitochondrial genome: the protein-coding, ribosomal RNA and transfer RNA genes.
 SYMBOL_PREFIX = "MT-"
-LOCUS_TYPE = "gene with protein product"
+LOCUS_TYPES = {"gene with protein product", "RNA, ribosomal", "RNA, transfer"}
 
 def main():
     assert len(sys.argv) == 1, "Usage: derive_human_mitochondrial.py"
@@ -23,7 +23,7 @@ def main():
 
     rows = []
     for row, (symbol, hgnc_id, locus_type) in enumerate(zip(frame.symbol, frame.hgnc_id, frame.locus_type)):
-        if symbol.startswith(SYMBOL_PREFIX) and locus_type == LOCUS_TYPE:
+        if symbol.startswith(SYMBOL_PREFIX) and locus_type in LOCUS_TYPES:
             rows.append((symbol, hgnc_id, provenance.step(source_name, row + 2, symbol_column)))
 
     source_files.write_derived(LIST_SOURCES_DIR, DATA_FILE, version_file, rows)

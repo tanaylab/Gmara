@@ -1,6 +1,6 @@
 # Derived from the MGI namespace source by `scripts/derive_mouse_mitochondrial.py`.
-# The protein-coding genes of the mitochondrial DNA. These are the mt-* symbols whose Feature Type is "protein coding
-# gene" and whose Status is "O".
+# The genes of the mitochondrial DNA. These are the mt-* symbols whose Feature Type is "protein coding gene", "rRNA
+# gene" or "tRNA gene", and whose Status is "O".
 # Column 2 is the provenance of each gene in the MGI namespace source.
 - data_file: MGI.{version}.tsv
   has_header: false
